@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:libaas_app/common_widget/app_color.dart';
 import 'package:libaas_app/common_widget/container_global.dart';
 import 'package:libaas_app/common_widget/spaces.dart';
 import 'package:libaas_app/common_widget/text_global.dart';
+import 'package:libaas_app/component/button_component.dart';
+import 'package:libaas_app/views/auth/signin_screen/signin_button_screen.dart';
 
 PageController _pageController = PageController();
 List<String> images = [
@@ -21,6 +25,7 @@ class OnboardingScreen extends StatelessWidget {
         children: const [
           PageOneScreen(),
           PageTwoScreen(),
+          PageThreeScreen(),
         ],
       )),
     );
@@ -89,7 +94,7 @@ class PageOneScreen extends StatelessWidget {
                   },
                   child: const CircleAvatar(
                     radius: 30,
-                    backgroundColor: Color(0xff7FBC99),
+                    backgroundColor: ColorConstraint.primaryColor,
                     child: Icon(
                       Icons.arrow_forward,
                       color: Colors.white,
@@ -169,7 +174,7 @@ class PageTwoScreen extends StatelessWidget {
                     },
                     child: const CircleAvatar(
                       radius: 30,
-                      backgroundColor: Color(0xff7FBC99),
+                      backgroundColor: ColorConstraint.primaryColor,
                       child: Icon(
                         Icons.arrow_back,
                         color: Colors.white,
@@ -178,16 +183,16 @@ class PageTwoScreen extends StatelessWidget {
                   ),
                   GestureDetector(
                     onTap: () {
-                      // if (_pageController.hasClients) {
-                      //   _pageController.nextPage(
-                      //     duration: const Duration(seconds: 1),
-                      //     curve: Curves.easeIn,
-                      //   );
-                      // }
+                      if (_pageController.hasClients) {
+                        _pageController.nextPage(
+                          duration: const Duration(seconds: 1),
+                          curve: Curves.easeIn,
+                        );
+                      }
                     },
                     child: const CircleAvatar(
                       radius: 30,
-                      backgroundColor: Color(0xff7FBC99),
+                      backgroundColor: ColorConstraint.primaryColor,
                       child: Icon(
                         Icons.arrow_forward,
                         color: Colors.white,
@@ -195,6 +200,70 @@ class PageTwoScreen extends StatelessWidget {
                     ),
                   ),
                 ],
+              ),
+              Spaces.large
+            ],
+          ),
+        )),
+      ),
+    );
+  }
+}
+
+class PageThreeScreen extends StatelessWidget {
+  const PageThreeScreen({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return SafeArea(
+      child: Scaffold(
+        body: containerGlobalWidget(Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 25.0),
+          child: Column(
+            children: [
+              Spaces.mid,
+              SizedBox(
+                width: MediaQuery.of(context).size.width,
+                height: 350,
+                child: PageView.builder(
+                    itemCount: images.length,
+                    pageSnapping: true,
+                    itemBuilder: (context, pagePosition) {
+                      return Container(
+                        clipBehavior: Clip.antiAliasWithSaveLayer,
+                        width: MediaQuery.of(context).size.width,
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(20.0)),
+                        margin: const EdgeInsets.all(10),
+                        child: Image.asset(images[2], fit: BoxFit.cover),
+                      );
+                    }),
+              ),
+              Spaces.mid,
+              Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: indicators(images.length, 1)),
+              Spaces.mid,
+              Center(
+                child: textGlobalWidget(
+                    text: 'Weekly Planner',
+                    fontSize: 32.0,
+                    fontWeight: FontWeight.bold),
+              ),
+              Spaces.smallh,
+              Center(
+                child: textGlobalWidget(
+                    text:
+                        "\"Step into the week with style.Plan your outfits effortlessly with our curated weekly wardrobe picks.\"",
+                    fontSize: 14.0,
+                    fontWeight: FontWeight.w600),
+              ),
+              const Spacer(),
+              ButtonComponent(
+                text: 'Get Start',
+                onTap: () {
+                  Get.to(const SignInButtonScreen());
+                },
               ),
               Spaces.large
             ],

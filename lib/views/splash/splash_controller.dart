@@ -8,10 +8,8 @@ class SplashController extends GetxController {
   void onInit() {
     // TODO: implement onInit
     super.onInit();
-    Timer(const Duration(seconds: 4), () {
+    Future.delayed(const Duration(seconds: 10), () {
       Get.to(const OnboardingScreen());
     });
-    // Future.delayed(const Duration(seconds: 5), () {
-    // });
   }
 }
