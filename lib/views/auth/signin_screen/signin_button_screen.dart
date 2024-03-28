@@ -5,6 +5,7 @@ import 'package:libaas_app/common_widget/container_global.dart';
 import 'package:libaas_app/common_widget/spaces.dart';
 import 'package:libaas_app/common_widget/text_global.dart';
 import 'package:libaas_app/views/auth/signin_screen/signin_screen.dart';
+import 'package:libaas_app/views/auth/signup_screen/signup_screen.dart';
 
 class SignInButtonScreen extends StatelessWidget {
   const SignInButtonScreen({super.key});
@@ -62,7 +63,9 @@ class SignInButtonScreen extends StatelessWidget {
                       fontWeight: FontWeight.w500,
                       textColor: Colors.black),
                   GestureDetector(
-                    onTap: () {},
+                    onTap: () {
+                      Get.to(SignUpScreen());
+                    },
                     child: textGlobalWidget(
                         text: 'Sign Up',
                         fontSize: 17.0,

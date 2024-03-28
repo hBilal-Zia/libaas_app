@@ -5,5 +5,4 @@ class SignInController extends GetxController {
   TextEditingController emailController = TextEditingController();
   TextEditingController pwController = TextEditingController();
   final signinKey = GlobalKey<FormState>();
-  RxBool isTick = false.obs;
 }

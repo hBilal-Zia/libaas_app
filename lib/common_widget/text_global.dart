@@ -4,6 +4,7 @@ import 'package:google_fonts/google_fonts.dart';
 Widget textGlobalWidget(
     {required String text,
     double? fontSize,
+    TextAlign? textAlign,
     FontWeight? fontWeight,
     Color? textColor}) {
   return Text(
@@ -13,6 +14,6 @@ Widget textGlobalWidget(
         color: textColor ?? const Color(0xff030303),
         fontWeight: fontWeight ?? FontWeight.w500,
         fontSize: fontSize ?? 16.0),
-    textAlign: TextAlign.center,
+    textAlign: textAlign ?? TextAlign.center,
   );
 }

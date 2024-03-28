@@ -8,6 +8,7 @@ import 'package:libaas_app/component/button_component.dart';
 import 'package:libaas_app/component/textfield_component.dart';
 import 'package:libaas_app/views/auth/reset_screen/reset_screen.dart';
 import 'package:libaas_app/views/auth/signin_screen/controller/signin_controller.dart';
+import 'package:libaas_app/views/auth/signup_screen/signup_screen.dart';
 
 class SignInScreen extends StatelessWidget {
   SignInScreen({super.key});
@@ -43,7 +44,9 @@ class SignInScreen extends StatelessWidget {
                               fontWeight: FontWeight.w500,
                               textColor: Colors.black),
                           GestureDetector(
-                            onTap: () {},
+                            onTap: () {
+                              Get.offAll(SignUpScreen());
+                            },
                             child: textGlobalWidget(
                                 text: 'Sign Up',
                                 fontSize: 16.0,
@@ -69,42 +72,6 @@ class SignInScreen extends StatelessWidget {
                         textEditingController: _signInController.pwController,
                       ),
                       Spaces.extrasmall,
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 5.0),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Row(
-                              children: [
-                                textGlobalWidget(
-                                    text: 'I agree to the  ',
-                                    fontSize: 12.0,
-                                    fontWeight: FontWeight.w500,
-                                    textColor: Colors.black),
-                                GestureDetector(
-                                  onTap: () {},
-                                  child: textGlobalWidget(
-                                      text: 'terms and Condition',
-                                      fontSize: 12.0,
-                                      fontWeight: FontWeight.w600,
-                                      textColor: Colors.black),
-                                ),
-                              ],
-                            ),
-                            Transform.scale(
-                                scale: 0.9,
-                                child: Obx(() {
-                                  return Checkbox(
-                                      activeColor: Colors.grey.shade800,
-                                      checkColor: Colors.white,
-                                      value: _signInController.isTick.value,
-                                      onChanged: (value) {
-                                        _signInController.isTick.value = value!;
-                                      });
-                                })),
-                          ],
-                        ),
-                      ),
                       Spaces.large,
                       Spaces.large,
                       ButtonComponent(
@@ -115,12 +82,6 @@ class SignInScreen extends StatelessWidget {
                               .validate()) {
                             // Validate the form here
                             // Proceed with the sign in process
-                          } else if (_signInController.isTick.value == false) {
-                            ScaffoldMessenger.of(context).showSnackBar(
-                                const SnackBar(
-                                    backgroundColor: Colors.red,
-                                    content: Text(
-                                        'Please tick the terms and condition')));
                           }
                         },
                       ),
