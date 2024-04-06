@@ -10,10 +10,12 @@ Widget textGlobalWidget(
   return Text(
     text,
     style: TextStyle(
+        overflow: TextOverflow.ellipsis,
         fontFamily: GoogleFonts.openSans().fontFamily,
         color: textColor ?? const Color(0xff030303),
         fontWeight: fontWeight ?? FontWeight.w500,
         fontSize: fontSize ?? 16.0),
+    maxLines: 2,
     textAlign: textAlign ?? TextAlign.center,
   );
 }

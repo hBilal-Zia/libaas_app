@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:libaas_app/views/home_screen/controller/home_controller.dart';
 import 'package:libaas_app/views/splash/splash.dart';
 import 'package:libaas_app/views/splash/splash_controller.dart';
 
 void main() {
   Get.put(SplashController());
+  Get.put(HomeController());
   runApp(const MyApp());
 }
 

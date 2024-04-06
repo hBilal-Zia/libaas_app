@@ -11,6 +11,8 @@ import 'package:libaas_app/views/auth/name_screen/controller/name_screen_control
 import 'package:libaas_app/views/auth/signin_screen/signin_screen.dart';
 import 'package:libaas_app/views/auth/signup_screen/controller/signup_controller.dart';
 import 'package:libaas_app/views/auth/verify_email/verify_email.dart';
+import 'package:libaas_app/views/home_screen/controller/home_controller.dart';
+import 'package:libaas_app/views/home_screen/nav_bar.dart';
 
 class NameScreen extends StatelessWidget {
   NameScreen({super.key});
@@ -72,8 +74,27 @@ class NameScreen extends StatelessWidget {
                               ),
                             ),
                             Align(
-                                alignment: Alignment.bottomCenter,
-                                child: Image.asset('asset/images/Group 1.png')),
+                              alignment: Alignment.bottomCenter,
+                              child: GetBuilder<NameScreenController>(
+                                init: NameScreenController(),
+                                builder: (controller) {
+                                  return controller.image != null
+                                      ? CircleAvatar(
+                                          radius: 40,
+                                          backgroundImage: FileImage(
+                                            controller.image!,
+                                          ),
+                                        )
+                                      : GestureDetector(
+                                          onTap: () {
+                                            _nameScreenController
+                                                .showOptions(context);
+                                          },
+                                          child: Image.asset(
+                                              'asset/images/Group 1.png'));
+                                },
+                              ),
+                            ),
                           ],
                         ),
                       ),
@@ -84,7 +105,7 @@ class NameScreen extends StatelessWidget {
                           text: 'Completed',
                           fontSize: 24,
                           onTap: () {
-                            // Get.offAll(const HomeScreen());
+                            Get.offAll(const NavBar());
                           }),
                     ]),
               ),

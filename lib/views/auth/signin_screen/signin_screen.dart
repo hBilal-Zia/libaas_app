@@ -9,6 +9,7 @@ import 'package:libaas_app/component/textfield_component.dart';
 import 'package:libaas_app/views/auth/reset_screen/reset_screen.dart';
 import 'package:libaas_app/views/auth/signin_screen/controller/signin_controller.dart';
 import 'package:libaas_app/views/auth/signup_screen/signup_screen.dart';
+import 'package:libaas_app/views/home_screen/nav_bar.dart';
 
 class SignInScreen extends StatelessWidget {
   SignInScreen({super.key});
@@ -80,8 +81,7 @@ class SignInScreen extends StatelessWidget {
                         onTap: () {
                           if (_signInController.signinKey.currentState!
                               .validate()) {
-                            // Validate the form here
-                            // Proceed with the sign in process
+                            Get.offAll(const NavBar());
                           }
                         },
                       ),

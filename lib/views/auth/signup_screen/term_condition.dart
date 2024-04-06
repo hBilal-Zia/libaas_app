@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:libaas_app/common_widget/container_global.dart';
 import 'package:libaas_app/common_widget/spaces.dart';
 import 'package:libaas_app/common_widget/text_global.dart';
+import 'package:libaas_app/component/appbar_component.dart';
 
 class TermConditionScreen extends StatelessWidget {
   const TermConditionScreen({super.key});
@@ -12,50 +13,11 @@ class TermConditionScreen extends StatelessWidget {
     return SafeArea(
       child: Scaffold(
         extendBodyBehindAppBar: true,
-        appBar: PreferredSize(
-            preferredSize: const Size.fromHeight(90.0),
+        appBar: const PreferredSize(
+            preferredSize: Size.fromHeight(90.0),
             child: Padding(
-              padding: const EdgeInsets.only(top: 20.0, right: 10.0),
-              child: AppBar(
-                backgroundColor: Colors.transparent,
-                automaticallyImplyLeading: false,
-                surfaceTintColor: Colors.transparent,
-                titleSpacing: 0.0,
-                title: Container(
-                  clipBehavior: Clip.antiAliasWithSaveLayer,
-                  height: 60,
-                  decoration: const BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.only(
-                          topRight: Radius.circular(30.0),
-                          bottomRight: Radius.circular(30.0))),
-                  child: Padding(
-                    padding: const EdgeInsets.only(left: 15.0, right: 30.0),
-                    child: Row(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        GestureDetector(
-                            onTap: () {
-                              Get.back();
-                            },
-                            child: const Icon(
-                              Icons.arrow_back,
-                              color: Colors.black,
-                              size: 30,
-                            )), // Leading icon
-                        const SizedBox(
-                            width:
-                                10.0), // Adjust the spacing between icon and title
-                        textGlobalWidget(
-                            text: 'Term and Condition',
-                            fontSize: 30.0,
-                            fontWeight: FontWeight.w500,
-                            textColor: Colors.black),
-                      ],
-                    ),
-                  ),
-                ),
-              ),
+              padding: EdgeInsets.only(top: 20.0, right: 10.0),
+              child: AppBarComponent(),
             )),
         body: containerGlobalWidget(Padding(
             padding: const EdgeInsets.symmetric(horizontal: 25.0),
