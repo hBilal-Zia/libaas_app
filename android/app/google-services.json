@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "261530830347",
+    "project_id": "libaasapp",
+    "storage_bucket": "libaasapp.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:261530830347:android:abe0a98f663dfc24fe690e",
+        "android_client_info": {
+          "package_name": "com.example.libaas_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAQeLjDYmvmcKtumg68jQVb6jXwkEOH67I"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

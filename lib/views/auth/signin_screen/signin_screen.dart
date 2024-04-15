@@ -81,7 +81,7 @@ class SignInScreen extends StatelessWidget {
                         onTap: () {
                           if (_signInController.signinKey.currentState!
                               .validate()) {
-                            Get.offAll(const NavBar());
+                            _signInController.signInUser(context);
                           }
                         },
                       ),

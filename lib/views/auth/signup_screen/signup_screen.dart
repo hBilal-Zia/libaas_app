@@ -307,8 +307,9 @@ class SignUpScreen extends StatelessWidget {
                         fontSize: 24,
                         onTap: () {
                           if (_signUpController.signupKey.currentState!
-                              .validate()) {
-                            Get.offAll(const VerifyEmailScreen());
+                                  .validate() &&
+                              _signUpController.isTick.value != false) {
+                            _signUpController.signUpUser(context);
                           } else if (_signUpController.isTick.value == false) {
                             ScaffoldMessenger.of(context).showSnackBar(
                                 const SnackBar(

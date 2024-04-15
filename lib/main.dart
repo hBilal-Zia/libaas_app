@@ -1,10 +1,16 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:libaas_app/firebase_options.dart';
 import 'package:libaas_app/views/home_screen/controller/home_controller.dart';
 import 'package:libaas_app/views/splash/splash.dart';
 import 'package:libaas_app/views/splash/splash_controller.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   Get.put(SplashController());
   Get.put(HomeController());
   runApp(const MyApp());
