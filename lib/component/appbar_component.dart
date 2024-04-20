@@ -6,8 +6,17 @@ class AppBarComponent extends StatelessWidget {
   final String? title;
   final bool? isBack;
   final bool? isShowUser;
-  const AppBarComponent(
-      {super.key, this.title, this.isBack = true, this.isShowUser = false});
+  final bool? isShowDone;
+  final VoidCallback? onClick;
+
+  const AppBarComponent({
+    super.key,
+    this.title,
+    this.isBack = true,
+    this.isShowUser = false,
+    this.isShowDone = false,
+    this.onClick,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +33,26 @@ class AppBarComponent extends StatelessWidget {
                     child: Image.asset('asset/images/user.png'),
                   ),
                 )
-              : Container(),
+              : isShowDone == true
+                  ? GestureDetector(
+                      onTap: onClick,
+                      child: Container(
+                        decoration: BoxDecoration(
+                            color: const Color(0xff094A4F),
+                            borderRadius: BorderRadius.circular(20.0)),
+                        alignment: Alignment.center,
+                        child: const Padding(
+                          padding: EdgeInsets.symmetric(
+                              horizontal: 11.0, vertical: 2.0),
+                          child: Text(
+                            'Done',
+                            style:
+                                TextStyle(color: Colors.white, fontSize: 18.0),
+                          ),
+                        ),
+                      ),
+                    )
+                  : Container(),
         ],
         backgroundColor: Colors.transparent,
         automaticallyImplyLeading: false,

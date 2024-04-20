@@ -18,8 +18,23 @@ class ResetScreen extends StatelessWidget {
     return SafeArea(
       child: Scaffold(
         extendBodyBehindAppBar: true,
-        appBar: const PreferredSize(
-            preferredSize: Size.fromHeight(55), child: AppBarComponent()),
+        appBar: PreferredSize(
+            preferredSize: const Size.fromHeight(55),
+            child: Padding(
+              padding: const EdgeInsets.only(top: 20, left: 25.0),
+              child: Align(
+                alignment: Alignment.topLeft,
+                child: GestureDetector(
+                  onTap: () {
+                    Get.back();
+                  },
+                  child: const Icon(
+                    Icons.arrow_back_ios,
+                    color: Colors.black,
+                  ),
+                ),
+              ),
+            )),
         body: containerGlobalWidget(Padding(
             padding: const EdgeInsets.symmetric(horizontal: 25.0),
             child: SingleChildScrollView(
@@ -54,8 +69,7 @@ class ResetScreen extends StatelessWidget {
                         onTap: () {
                           if (_resetController.resetKey.currentState!
                               .validate()) {
-                            // Validate the form here
-                            // Proceed with the sign in process
+                            _resetController.forgotPassword(context);
                           }
                         },
                       ),

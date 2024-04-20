@@ -45,6 +45,7 @@ class _VerifyEmailScreenState extends State<VerifyEmailScreen> {
                     GestureDetector(
                       onTap: () {
                         auth.currentUser!.sendEmailVerification();
+                        debugPrint(auth.currentUser!.email);
                         isSend = true;
                         String code = "Email has been sended";
                         var snackbar = SnackBar(

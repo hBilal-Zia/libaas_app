@@ -141,127 +141,126 @@ class SignUpScreen extends StatelessWidget {
                         ),
                       ),
                       Spaces.mid,
-                      Container(
-                        height: 55,
-                        width: Get.width,
-                        decoration: BoxDecoration(
-                          color: const Color(0xffF2F0F0),
-                          borderRadius: BorderRadius.circular(40.0),
-                        ),
-                        child: Padding(
-                          padding: const EdgeInsets.only(
-                              left: 15.0, top: 10.0, bottom: 10.0),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: <Widget>[
-                              SizedBox(
-                                width: 60,
-                                child: TextFormField(
-                                  controller: _signUpController.dayController,
-                                  style: TextStyle(
-                                    fontFamily:
-                                        GoogleFonts.openSans().fontFamily,
-                                    fontSize: 19.0,
-                                    fontWeight: FontWeight.w500,
-                                  ),
-                                  keyboardType: TextInputType.number,
-                                  decoration: InputDecoration(
-                                    errorBorder: const OutlineInputBorder(
-                                        borderSide: BorderSide.none),
-                                    contentPadding:
-                                        const EdgeInsets.only(top: 10.0),
-                                    enabledBorder: const OutlineInputBorder(
-                                        borderSide: BorderSide.none),
-                                    focusedBorder: const OutlineInputBorder(
-                                        borderSide: BorderSide.none),
-                                    hintText: 'Day',
-                                    hintStyle: TextStyle(
-                                      color: const Color(0xffAAA3A3),
-                                      fontFamily:
-                                          GoogleFonts.openSans().fontFamily,
-                                      fontSize: 19.0,
-                                      fontWeight: FontWeight.w500,
-                                    ),
-                                  ),
-                                ),
-                              ),
-                              Container(
-                                height: Get.height,
-                                width: 1,
-                                color: Colors.black,
-                              ),
-                              SizedBox(
-                                width: 110,
-                                child: TextFormField(
-                                  controller: _signUpController.monthController,
-                                  style: TextStyle(
-                                    fontFamily:
-                                        GoogleFonts.openSans().fontFamily,
-                                    fontSize: 19.0,
-                                    fontWeight: FontWeight.w500,
-                                  ),
-                                  keyboardType: TextInputType.number,
-                                  decoration: InputDecoration(
-                                    errorBorder: const OutlineInputBorder(
-                                        borderSide: BorderSide.none),
-                                    contentPadding: const EdgeInsets.only(
-                                        top: 10.0, left: 25.0, right: 25.0),
-                                    enabledBorder: const OutlineInputBorder(
-                                        borderSide: BorderSide.none),
-                                    focusedBorder: const OutlineInputBorder(
-                                        borderSide: BorderSide.none),
-                                    hintText: 'Month',
-                                    hintStyle: TextStyle(
-                                      color: const Color(0xffAAA3A3),
-                                      fontFamily:
-                                          GoogleFonts.openSans().fontFamily,
-                                      fontSize: 19.0,
-                                      fontWeight: FontWeight.w500,
-                                    ),
-                                  ),
-                                ),
-                              ),
-                              Container(
-                                height: Get.height,
-                                width: 1,
-                                color: Colors.black,
-                              ),
-                              SizedBox(
-                                width: 110,
-                                child: TextFormField(
-                                  controller: _signUpController.yearController,
-                                  style: TextStyle(
-                                    fontFamily:
-                                        GoogleFonts.openSans().fontFamily,
-                                    fontSize: 19.0,
-                                    fontWeight: FontWeight.w500,
-                                  ),
-                                  keyboardType: TextInputType.number,
-                                  decoration: InputDecoration(
-                                    errorBorder: const OutlineInputBorder(
-                                        borderSide: BorderSide.none),
-                                    contentPadding: const EdgeInsets.only(
-                                        top: 10.0, left: 25.0, right: 0.0),
-                                    enabledBorder: const OutlineInputBorder(
-                                        borderSide: BorderSide.none),
-                                    focusedBorder: const OutlineInputBorder(
-                                        borderSide: BorderSide.none),
-                                    hintText: 'Year',
-                                    hintStyle: TextStyle(
-                                      color: const Color(0xffAAA3A3),
-                                      fontFamily:
-                                          GoogleFonts.openSans().fontFamily,
-                                      fontSize: 19.0,
-                                      fontWeight: FontWeight.w500,
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
+                      TextFieldComponent(
+                        calender: true,
+                        showPass: false,
+                        showSuffix: true,
+                        readOnly: true,
+                        calenderClick: () async {
+                          DateTime? pickedDate = await showDatePicker(
+                              context: context,
+                              initialDate: DateTime.now(), //get today's date
+                              firstDate: DateTime(
+                                  2000), //DateTime.now() - not to allow to choose before today.
+                              lastDate: DateTime(2101));
+
+                          _signUpController.dayController.text =
+                              '${pickedDate!.year}-${pickedDate.month}-${pickedDate.day}';
+                          debugPrint(_signUpController.dayController.text);
+                        },
+                        validator: (value) {
+                          if (value!.isEmpty) {
+                            return 'Select the date';
+                          }
+                          return null;
+                        },
+                        hintText: 'Date of birth',
+                        textEditingController: _signUpController.dayController,
                       ),
+                      // Container(
+                      //   height: 55,
+                      //   width: Get.width,
+                      //   decoration: BoxDecoration(
+                      //     color: const Color(0xffF2F0F0),
+                      //     borderRadius: BorderRadius.circular(40.0),
+                      //   ),
+                      //   child: Padding(
+                      //     padding: const EdgeInsets.only(
+                      //         left: 15.0, top: 10.0, bottom: 10.0),
+                      //     child: Row(
+                      //       mainAxisAlignment: MainAxisAlignment.center,
+                      //       crossAxisAlignment: CrossAxisAlignment.center,
+                      //       children: <Widget>[
+                      //         SizedBox(
+                      //           width: 60,
+                      //           child:
+                      //         ),
+                      //         Container(
+                      //           height: Get.height,
+                      //           width: 1,
+                      //           color: Colors.black,
+                      //         ),
+                      //         SizedBox(
+                      //           width: 110,
+                      //           child: TextFormField(
+                      //             controller: _signUpController.monthController,
+                      //             style: TextStyle(
+                      //               fontFamily:
+                      //                   GoogleFonts.openSans().fontFamily,
+                      //               fontSize: 19.0,
+                      //               fontWeight: FontWeight.w500,
+                      //             ),
+                      //             keyboardType: TextInputType.number,
+                      //             decoration: InputDecoration(
+                      //               errorBorder: const OutlineInputBorder(
+                      //                   borderSide: BorderSide.none),
+                      //               contentPadding: const EdgeInsets.only(
+                      //                   top: 10.0, left: 25.0, right: 25.0),
+                      //               enabledBorder: const OutlineInputBorder(
+                      //                   borderSide: BorderSide.none),
+                      //               focusedBorder: const OutlineInputBorder(
+                      //                   borderSide: BorderSide.none),
+                      //               hintText: 'Month',
+                      //               hintStyle: TextStyle(
+                      //                 color: const Color(0xffAAA3A3),
+                      //                 fontFamily:
+                      //                     GoogleFonts.openSans().fontFamily,
+                      //                 fontSize: 19.0,
+                      //                 fontWeight: FontWeight.w500,
+                      //               ),
+                      //             ),
+                      //           ),
+                      //         ),
+                      //         Container(
+                      //           height: Get.height,
+                      //           width: 1,
+                      //           color: Colors.black,
+                      //         ),
+                      //         SizedBox(
+                      //           width: 110,
+                      //           child: TextFormField(
+                      //             controller: _signUpController.yearController,
+                      //             style: TextStyle(
+                      //               fontFamily:
+                      //                   GoogleFonts.openSans().fontFamily,
+                      //               fontSize: 19.0,
+                      //               fontWeight: FontWeight.w500,
+                      //             ),
+                      //             keyboardType: TextInputType.number,
+                      //             decoration: InputDecoration(
+                      //               errorBorder: const OutlineInputBorder(
+                      //                   borderSide: BorderSide.none),
+                      //               contentPadding: const EdgeInsets.only(
+                      //                   top: 10.0, left: 25.0, right: 0.0),
+                      //               enabledBorder: const OutlineInputBorder(
+                      //                   borderSide: BorderSide.none),
+                      //               focusedBorder: const OutlineInputBorder(
+                      //                   borderSide: BorderSide.none),
+                      //               hintText: 'Year',
+                      //               hintStyle: TextStyle(
+                      //                 color: const Color(0xffAAA3A3),
+                      //                 fontFamily:
+                      //                     GoogleFonts.openSans().fontFamily,
+                      //                 fontSize: 19.0,
+                      //                 fontWeight: FontWeight.w500,
+                      //               ),
+                      //             ),
+                      //           ),
+                      //         ),
+                      //       ],
+                      //     ),
+                      //   ),
+                      // ),
                       Spaces.extrasmall,
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 5.0),
@@ -317,9 +316,7 @@ class SignUpScreen extends StatelessWidget {
                                     content: Text(
                                         'Please tick the terms and condition')));
                           } else if (_signUpController
-                                  .dayController.text.isEmpty ||
-                              _signUpController.monthController.text.isEmpty ||
-                              _signUpController.yearController.text.isEmpty) {
+                              .dayController.text.isEmpty) {
                             ScaffoldMessenger.of(context).showSnackBar(
                                 const SnackBar(
                                     backgroundColor: Colors.red,

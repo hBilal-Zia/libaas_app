@@ -11,8 +11,7 @@ class SignUpController extends GetxController {
   TextEditingController emailController = TextEditingController();
   TextEditingController pwController = TextEditingController();
   TextEditingController dayController = TextEditingController();
-  TextEditingController monthController = TextEditingController();
-  TextEditingController yearController = TextEditingController();
+
   final _auth = FirebaseAuth.instance;
   final user = FirebaseAuth.instance.currentUser;
   final signupKey = GlobalKey<FormState>();
@@ -26,25 +25,25 @@ class SignUpController extends GetxController {
         email: emailController.text,
         password: pwController.text,
       );
-      if (user != null) {
-        addUser(
-            UserModel(
-              userId: user!.uid,
-              dateofBirth:
-                  '${dayController.text}/${monthController.text}/${yearController.text}',
-              fullName: nameController.text,
-              email: emailController.text,
-              gender: genderSelected.value,
-            ),
-            context);
-      }
+      debugPrint('lll');
+      final user = _auth.currentUser;
+      debugPrint(user!.uid);
+      await addUser(
+          UserModel(
+            userId: user.uid,
+            dateofBirth: dayController.text,
+            fullName: nameController.text,
+            email: emailController.text,
+            gender: genderSelected.value,
+          ),
+          context);
 
+      debugPrint('fff');
       emailController.clear();
       pwController.clear();
       nameController.clear();
       dayController.clear();
-      monthController.clear();
-      yearController.clear();
+
       genderSelected.value = 'Male';
       update();
     } on FirebaseAuthException catch (e) {
@@ -85,6 +84,7 @@ class SignUpController extends GetxController {
         // ignore: use_build_context_synchronously
         ScaffoldMessenger.of(context).showSnackBar(snackbar);
         await datauser.doc(user.uid).set(userdata.toMap());
+        debugPrint('ddddd');
         Get.offAll(const VerifyEmailScreen());
       }
     } catch (e) {

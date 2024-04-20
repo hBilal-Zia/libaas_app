@@ -5,13 +5,21 @@ class TextFieldComponent extends StatefulWidget {
   final TextEditingController textEditingController;
   final String hintText;
   final bool? showSuffix;
+  final bool? readOnly;
+  final bool? calender;
+  final bool? showPass;
+  final VoidCallback? calenderClick;
   final FormFieldValidator<String> validator;
 
   const TextFieldComponent({
     Key? key,
     required this.textEditingController,
     required this.hintText,
+    this.readOnly = false,
+    this.calender = false,
     this.showSuffix = false,
+    this.showPass = true,
+    this.calenderClick,
     required this.validator,
   }) : super(key: key);
 
@@ -27,9 +35,12 @@ class _TextFieldComponentState extends State<TextFieldComponent> {
     // Determine whether to obscure the text based on the showSuffix property
     if (widget.showSuffix == false) {
       isObscured = false;
+    } else if (widget.showSuffix == true && widget.showPass == false) {
+      isObscured = false;
     }
 
     return TextFormField(
+      readOnly: widget.readOnly!,
       controller: widget.textEditingController,
       obscureText: isObscured,
       validator: widget.validator,
@@ -39,7 +50,7 @@ class _TextFieldComponentState extends State<TextFieldComponent> {
         fontWeight: FontWeight.w500,
       ),
       decoration: InputDecoration(
-        suffixIcon: widget.showSuffix == true
+        suffixIcon: widget.showSuffix == true && widget.showPass == true
             ? GestureDetector(
                 onTap: () {
                   setState(() {
@@ -51,7 +62,15 @@ class _TextFieldComponentState extends State<TextFieldComponent> {
                   color: const Color(0xffAAA3A3),
                 ),
               )
-            : const SizedBox(),
+            : widget.showSuffix == true && widget.calender == true
+                ? GestureDetector(
+                    onTap: widget.calenderClick,
+                    child: const Icon(
+                      Icons.calendar_month,
+                      color: Color(0xffAAA3A3),
+                    ),
+                  )
+                : const SizedBox(),
         hintText: widget.hintText,
         hintStyle: TextStyle(
           color: const Color(0xffAAA3A3),
