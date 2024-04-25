@@ -8,6 +8,7 @@ import 'package:libaas_app/component/button_component.dart';
 import 'package:libaas_app/component/textfield_component.dart';
 import 'package:libaas_app/views/auth/reset_screen/reset_screen.dart';
 import 'package:libaas_app/views/auth/signin_screen/controller/signin_controller.dart';
+import 'package:libaas_app/views/auth/signin_screen/signin_button_screen.dart';
 import 'package:libaas_app/views/auth/signup_screen/signup_screen.dart';
 import 'package:libaas_app/views/home_screen/nav_bar.dart';
 
@@ -50,6 +51,16 @@ class SignInScreen extends StatelessWidget {
                             },
                             child: textGlobalWidget(
                                 text: 'Sign Up',
+                                fontSize: 16.0,
+                                fontWeight: FontWeight.w600,
+                                textColor: Colors.black),
+                          ),
+                          GestureDetector(
+                            onTap: () {
+                              Get.offAll(const SignInButtonScreen());
+                            },
+                            child: textGlobalWidget(
+                                text: ' or Other',
                                 fontSize: 16.0,
                                 fontWeight: FontWeight.w600,
                                 textColor: Colors.black),

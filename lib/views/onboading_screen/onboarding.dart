@@ -262,7 +262,7 @@ class PageThreeScreen extends StatelessWidget {
               ButtonComponent(
                 text: 'Get Start',
                 onTap: () {
-                  Get.to(const SignInButtonScreen());
+                  Get.to(SignInButtonScreen());
                 },
               ),
               Spaces.large

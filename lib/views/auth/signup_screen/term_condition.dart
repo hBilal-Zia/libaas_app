@@ -13,10 +13,10 @@ class TermConditionScreen extends StatelessWidget {
     return SafeArea(
       child: Scaffold(
         extendBodyBehindAppBar: true,
-        appBar: const PreferredSize(
-            preferredSize: Size.fromHeight(90.0),
+        appBar: PreferredSize(
+            preferredSize: const Size.fromHeight(90.0),
             child: Padding(
-              padding: EdgeInsets.only(top: 20.0, right: 10.0),
+              padding: const EdgeInsets.only(top: 20.0, right: 10.0),
               child: AppBarComponent(),
             )),
         body: containerGlobalWidget(Padding(

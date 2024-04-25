@@ -4,7 +4,10 @@ import 'package:get/get.dart';
 import 'package:libaas_app/common_widget/container_global.dart';
 import 'package:libaas_app/common_widget/spaces.dart';
 import 'package:libaas_app/component/appbar_component.dart';
+import 'package:libaas_app/component/custom_dialog.dart';
 import 'package:libaas_app/views/auth/signin_screen/signin_screen.dart';
+import 'package:libaas_app/views/auth/signup_screen/term_condition.dart';
+import 'package:libaas_app/views/profile/profile_screen.dart';
 
 class SettingScreen extends StatefulWidget {
   const SettingScreen({super.key});
@@ -21,10 +24,10 @@ class _SettingScreenState extends State<SettingScreen> {
     return SafeArea(
       child: Scaffold(
         extendBodyBehindAppBar: true,
-        appBar: const PreferredSize(
-            preferredSize: Size.fromHeight(90.0),
+        appBar: PreferredSize(
+            preferredSize: const Size.fromHeight(90.0),
             child: Padding(
-              padding: EdgeInsets.only(top: 20.0, right: 10.0),
+              padding: const EdgeInsets.only(top: 20.0, right: 10.0),
               child: AppBarComponent(
                 title: 'Setting',
                 isBack: false,
@@ -40,13 +43,16 @@ class _SettingScreenState extends State<SettingScreen> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Spaces.large,
-                      const ListTile(
+                      ListTile(
+                        onTap: () {
+                          Get.to(ProfileScreen());
+                        },
                         titleAlignment: ListTileTitleAlignment.center,
-                        title: Text(
+                        title: const Text(
                           'Profile',
                           style: TextStyle(fontSize: 18.0),
                         ),
-                        trailing: Icon(Icons.arrow_forward_ios),
+                        trailing: const Icon(Icons.arrow_forward_ios),
                       ),
                       Spaces.extrasmall,
                       const Divider(
@@ -54,13 +60,16 @@ class _SettingScreenState extends State<SettingScreen> {
                         color: Colors.black,
                       ),
                       Spaces.extrasmall,
-                      const ListTile(
+                      ListTile(
+                        onTap: () {
+                          Get.to(const TermConditionScreen());
+                        },
                         titleAlignment: ListTileTitleAlignment.center,
-                        title: Text(
+                        title: const Text(
                           'Terms and Condition',
                           style: TextStyle(fontSize: 18.0),
                         ),
-                        trailing: Icon(Icons.arrow_forward_ios),
+                        trailing: const Icon(Icons.arrow_forward_ios),
                       ),
                       Spaces.extrasmall,
                       const Divider(
@@ -110,9 +119,17 @@ class _SettingScreenState extends State<SettingScreen> {
                         color: Colors.black,
                       ),
                       Spaces.extrasmall,
-                      const ListTile(
+                      ListTile(
+                        onTap: () {
+                          showDialog(
+                            context: context,
+                            builder: (BuildContext context) {
+                              return const DeleteAccountDialog();
+                            },
+                          );
+                        },
                         titleAlignment: ListTileTitleAlignment.center,
-                        title: Text(
+                        title: const Text(
                           'Delect Account',
                           style: TextStyle(fontSize: 18.0),
                         ),

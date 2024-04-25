@@ -1,4 +1,6 @@
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
@@ -18,6 +20,8 @@ class HomeScreen extends StatelessWidget {
     'asset/images/slider3.png'
   ];
   // final HomeController _controller = Get.put(HomeController());
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
   @override
   Widget build(BuildContext context) {
@@ -29,10 +33,10 @@ class HomeScreen extends StatelessWidget {
     return SafeArea(
       child: Scaffold(
         extendBodyBehindAppBar: true,
-        appBar: const PreferredSize(
-            preferredSize: Size.fromHeight(90.0),
+        appBar: PreferredSize(
+            preferredSize: const Size.fromHeight(90.0),
             child: Padding(
-              padding: EdgeInsets.only(top: 20.0, right: 10.0),
+              padding: const EdgeInsets.only(top: 20.0, right: 10.0),
               child: AppBarComponent(
                 title: 'Home',
                 isBack: false,
@@ -48,11 +52,40 @@ class HomeScreen extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      textGlobalWidget(
-                          text: 'Hello, Hamza!',
-                          fontSize: 33.0,
-                          fontWeight: FontWeight.w500,
-                          textColor: Colors.black),
+                      FutureBuilder<DocumentSnapshot>(
+                        future: _firestore
+                            .collection('user')
+                            .doc(_auth.currentUser!.uid)
+                            .get(),
+                        builder: (context, snapshot) {
+                          if (snapshot.connectionState ==
+                              ConnectionState.waiting) {
+                            // While data is loading
+                            return const CircularProgressIndicator(
+                              color: Colors.grey,
+                            ); // or any other loading indicator
+                          } else if (snapshot.hasError) {
+                            // If there's an error
+                            return Text('Error: ${snapshot.error}');
+                          } else {
+                            // When data is successfully loaded
+                            Map<String, dynamic>? data =
+                                snapshot.data?.data() as Map<String, dynamic>?;
+
+                            if (data != null) {
+                              debugPrint(data.toString());
+                              return textGlobalWidget(
+                                  text: 'Hello, ${data['name']}!',
+                                  fontSize: 33.0,
+                                  fontWeight: FontWeight.w500,
+                                  textColor: Colors.black);
+                            } else {
+                              // If data is null or empty
+                              return const Text('No data available');
+                            }
+                          }
+                        },
+                      ),
                       Spaces.smallh,
                       Center(
                         child: textGlobalWidget(

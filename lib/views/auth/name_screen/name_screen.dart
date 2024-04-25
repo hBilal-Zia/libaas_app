@@ -1,3 +1,7 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -19,6 +23,9 @@ class NameScreen extends StatelessWidget {
   final NameScreenController _nameScreenController =
       Get.put(NameScreenController());
 
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -34,11 +41,38 @@ class NameScreen extends StatelessWidget {
                     children: [
                       Spaces.large,
                       Spaces.large,
-                      textGlobalWidget(
-                          text: 'Hey, Hamza!',
-                          fontSize: 33.0,
-                          fontWeight: FontWeight.w600,
-                          textColor: Colors.black),
+                      FutureBuilder<DocumentSnapshot>(
+                        future: _firestore
+                            .collection('user')
+                            .doc(_auth.currentUser!.uid)
+                            .get(),
+                        builder: (context, snapshot) {
+                          if (snapshot.connectionState ==
+                              ConnectionState.waiting) {
+                            // While data is loading
+                            return const CircularProgressIndicator(); // or any other loading indicator
+                          } else if (snapshot.hasError) {
+                            // If there's an error
+                            return Text('Error: ${snapshot.error}');
+                          } else {
+                            // When data is successfully loaded
+                            Map<String, dynamic>? data =
+                                snapshot.data?.data() as Map<String, dynamic>?;
+
+                            if (data != null) {
+                              debugPrint(data.toString());
+                              return textGlobalWidget(
+                                  text: 'Hey, ${data['name']}!',
+                                  fontSize: 33.0,
+                                  fontWeight: FontWeight.w600,
+                                  textColor: Colors.black);
+                            } else {
+                              // If data is null or empty
+                              return const Text('No data available');
+                            }
+                          }
+                        },
+                      ),
                       Spaces.extrasmall,
                       SizedBox(
                         width: Get.width,
@@ -66,6 +100,7 @@ class NameScreen extends StatelessWidget {
                                 padding: const EdgeInsets.symmetric(
                                     horizontal: 20.0),
                                 child: TextFormField(
+                                  controller: _nameScreenController.username,
                                   decoration: const InputDecoration(
                                       border: UnderlineInputBorder(
                                           borderSide: BorderSide.none),
@@ -104,8 +139,72 @@ class NameScreen extends StatelessWidget {
                       ButtonComponent(
                           text: 'Completed',
                           fontSize: 24,
-                          onTap: () {
-                            Get.offAll(const NavBar());
+                          onTap: () async {
+                            debugPrint(_nameScreenController
+                                .username.text.isNotEmpty
+                                .toString());
+                            bool val = _nameScreenController.image != null;
+                            debugPrint(val.toString());
+                            if (_nameScreenController
+                                    .username.text.isNotEmpty &&
+                                _nameScreenController.image != null) {
+                              try {
+                                String fileName = DateTime.now()
+                                    .millisecondsSinceEpoch
+                                    .toString();
+                                debugPrint(fileName.toString());
+                                Reference storageReference = FirebaseStorage
+                                    .instance
+                                    .ref()
+                                    .child('images/$fileName');
+
+                                debugPrint(storageReference.toString());
+                                UploadTask uploadTask = storageReference
+                                    .putFile(_nameScreenController.image!);
+                                debugPrint(uploadTask.toString());
+
+                                TaskSnapshot taskSnapshot =
+                                    await uploadTask.whenComplete(() {});
+                                debugPrint('dsds');
+                                String imageUrl =
+                                    await taskSnapshot.ref.getDownloadURL();
+                                debugPrint('dd');
+
+                                // Update Firestore document with username and image URL
+                                await _firestore
+                                    .collection('user')
+                                    .doc(_auth.currentUser!.uid)
+                                    .update({
+                                  'userName':
+                                      _nameScreenController.username.text,
+                                  'image': imageUrl,
+                                });
+
+                                // Navigate to NavBar after successful update
+                                Get.offAll(const NavBar());
+                              } catch (e) {
+                                print('Error uploading image: $e');
+                                String errorMessage =
+                                    "An error occurred while uploading the image.";
+                                var snackbar = SnackBar(
+                                  content: Text(errorMessage),
+                                  backgroundColor: Colors.red,
+                                );
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  snackbar,
+                                );
+                              }
+                            } else {
+                              String errorMessage =
+                                  "Please fill in both username and select an image.";
+                              var snackbar = SnackBar(
+                                content: Text(errorMessage),
+                                backgroundColor: Colors.red,
+                              );
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                snackbar,
+                              );
+                            }
                           }),
                     ]),
               ),

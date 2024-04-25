@@ -6,6 +6,7 @@ import 'package:libaas_app/common_widget/app_color.dart';
 import 'package:libaas_app/views/add_item/add_item_screen.dart';
 import 'package:libaas_app/views/auth/setting_screen/setting_screen.dart';
 import 'package:libaas_app/views/home_screen/home_screen.dart';
+import 'package:libaas_app/views/notification_screen/notification_screen.dart';
 
 class NavBar extends StatefulWidget {
   const NavBar({super.key});
@@ -21,7 +22,7 @@ class _NavBarState extends State<NavBar> {
     HomeScreen(),
     Container(color: Colors.red),
     AddItemScreen(),
-    Container(color: Colors.orange),
+    const NotificationScreen(),
     const SettingScreen()
   ];
   @override

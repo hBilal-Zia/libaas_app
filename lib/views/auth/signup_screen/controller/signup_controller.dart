@@ -35,6 +35,8 @@ class SignUpController extends GetxController {
             fullName: nameController.text,
             email: emailController.text,
             gender: genderSelected.value,
+            userName: '',
+            image: '',
           ),
           context);
 

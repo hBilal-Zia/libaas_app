@@ -1,3 +1,5 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:libaas_app/common_widget/text_global.dart';
@@ -9,7 +11,7 @@ class AppBarComponent extends StatelessWidget {
   final bool? isShowDone;
   final VoidCallback? onClick;
 
-  const AppBarComponent({
+  AppBarComponent({
     super.key,
     this.title,
     this.isBack = true,
@@ -18,6 +20,9 @@ class AppBarComponent extends StatelessWidget {
     this.onClick,
   });
 
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -25,13 +30,47 @@ class AppBarComponent extends StatelessWidget {
       child: AppBar(
         actions: [
           isShowUser == true
-              ? CircleAvatar(
-                  radius: 28,
-                  backgroundColor: Colors.white,
-                  child: CircleAvatar(
-                    radius: 24,
-                    child: Image.asset('asset/images/user.png'),
-                  ),
+              ? FutureBuilder<DocumentSnapshot>(
+                  future: _firestore
+                      .collection('user')
+                      .doc(_auth.currentUser!.uid)
+                      .get(),
+                  builder: (context, snapshot) {
+                    if (snapshot.connectionState == ConnectionState.waiting) {
+                      // While data is loading
+                      return const CircularProgressIndicator(
+                        color: Colors.grey,
+                      ); // or any other loading indicator
+                    } else if (snapshot.hasError) {
+                      // If there's an error
+                      return Text('Error: ${snapshot.error}');
+                    } else {
+                      // When data is successfully loaded
+                      Map<String, dynamic>? data =
+                          snapshot.data?.data() as Map<String, dynamic>?;
+
+                      if (data != null) {
+                        debugPrint(data.toString());
+                        return CircleAvatar(
+                          radius: 28,
+                          backgroundColor: Colors.white,
+                          child: CircleAvatar(
+                            radius: 24,
+                            backgroundImage: NetworkImage(
+                              data['image'],
+                            ),
+                            // child: Image.network(
+                            //   data['image'],
+                            //   fit: BoxFit.fill,
+                            // ),
+                          ),
+                        );
+                      } else {
+                        // If data is null or empty
+                        return const Text('No data available');
+                      }
+                    }
+                  },
                 )
               : isShowDone == true
                   ? GestureDetector(

@@ -12,7 +12,20 @@
           "package_name": "com.example.libaas_app"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "261530830347-abtgccmo8ub1396t0qr161cim6m35k5m.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.libaas_app",
+            "certificate_hash": "066a7a2c8cd368f4a562e58eb84ebb1b8a222811"
+          }
+        },
+        {
+          "client_id": "261530830347-aeu7t5nc5i5sk2qefmb9ebhm63841oo2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyAQeLjDYmvmcKtumg68jQVb6jXwkEOH67I"
@@ -20,7 +33,19 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "261530830347-aeu7t5nc5i5sk2qefmb9ebhm63841oo2.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "261530830347-k667skj1rao34jphga2qo0h2s6diqvcb.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.libaasApp"
+              }
+            }
+          ]
         }
       }
     }
