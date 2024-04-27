@@ -7,9 +7,12 @@ import 'package:libaas_app/component/appbar_component.dart';
 import 'package:libaas_app/component/textfield_component.dart';
 import 'package:libaas_app/views/add_item/controller/add_item_controller.dart';
 
+import '../../common_widget/text_global.dart';
+
 class AddItemScreen extends StatelessWidget {
   AddItemScreen({super.key});
   final AddItemController _addItemController = Get.put(AddItemController());
+  bool isValue = true;
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -90,38 +93,108 @@ class AddItemScreen extends StatelessWidget {
                       )),
                       Spaces.mid,
                       TextFieldComponent(
+                        hintColor: const Color(0xff24686D).withOpacity(0.6),
+                        readOnly: true,
                         validator: FormValidator.validateName,
                         hintText: 'Description',
                         textEditingController:
                             _addItemController.descController,
                       ),
-                      Spaces.mid,
+                      Spaces.smallh,
+                      Visibility(
+                        visible: isValue,
+                        child: Center(
+                          child: textGlobalWidget(
+                              text: 'Casual Hoodies Sleeve',
+                              fontSize: 15.0,
+                              fontWeight: FontWeight.w600,
+                              textAlign: TextAlign.start,
+                              textColor: Colors.black),
+                        ),
+                      ),
+                      Spaces.smallh,
                       TextFieldComponent(
+                        hintColor: const Color(0xff24686D).withOpacity(0.6),
+                        readOnly: true,
                         validator: FormValidator.validateName,
                         hintText: 'Category',
                         textEditingController:
                             _addItemController.categoryController,
                       ),
-                      Spaces.mid,
+                      Spaces.smallh,
+                      Visibility(
+                        visible: isValue,
+                        child: Center(
+                          child: textGlobalWidget(
+                              text: 'Hoodies',
+                              fontSize: 15.0,
+                              fontWeight: FontWeight.w600,
+                              textAlign: TextAlign.start,
+                              textColor: Colors.black),
+                        ),
+                      ),
+                      Spaces.smallh,
                       TextFieldComponent(
+                        hintColor: const Color(0xff24686D).withOpacity(0.6),
+                        readOnly: true,
                         validator: FormValidator.validateName,
                         hintText: 'Color',
                         textEditingController:
                             _addItemController.colorController,
                       ),
-                      Spaces.mid,
+                      Spaces.smallh,
+                      Visibility(
+                        visible: isValue,
+                        child: Center(
+                          child: textGlobalWidget(
+                              text: 'Silver',
+                              fontSize: 15.0,
+                              fontWeight: FontWeight.w600,
+                              textAlign: TextAlign.start,
+                              textColor: Colors.black),
+                        ),
+                      ),
+                      Spaces.smallh,
                       TextFieldComponent(
+                        hintColor: const Color(0xff24686D).withOpacity(0.6),
+                        readOnly: true,
                         validator: FormValidator.validateName,
                         hintText: 'Season',
                         textEditingController:
                             _addItemController.seasonController,
                       ),
-                      Spaces.mid,
+                      Spaces.smallh,
+                      Visibility(
+                        visible: isValue,
+                        child: Center(
+                          child: textGlobalWidget(
+                              text: 'Winter',
+                              fontSize: 15.0,
+                              fontWeight: FontWeight.w600,
+                              textAlign: TextAlign.start,
+                              textColor: Colors.black),
+                        ),
+                      ),
+                      Spaces.smallh,
                       TextFieldComponent(
+                        hintColor: const Color(0xff24686D).withOpacity(0.6),
+                        readOnly: true,
                         validator: FormValidator.validateName,
                         hintText: 'Gender',
                         textEditingController:
                             _addItemController.genderController,
+                      ),
+                      Spaces.smallh,
+                      Visibility(
+                        visible: isValue,
+                        child: Center(
+                          child: textGlobalWidget(
+                              text: 'Male',
+                              fontSize: 15.0,
+                              fontWeight: FontWeight.w600,
+                              textAlign: TextAlign.start,
+                              textColor: Colors.black),
+                        ),
                       ),
                       Spaces.large,
                       Spaces.large,

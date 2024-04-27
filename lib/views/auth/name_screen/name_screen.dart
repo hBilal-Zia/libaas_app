@@ -61,11 +61,13 @@ class NameScreen extends StatelessWidget {
 
                             if (data != null) {
                               debugPrint(data.toString());
-                              return textGlobalWidget(
-                                  text: 'Hey, ${data['name']}!',
-                                  fontSize: 33.0,
-                                  fontWeight: FontWeight.w600,
-                                  textColor: Colors.black);
+                              return FittedBox(
+                                child: textGlobalWidget(
+                                    text: 'Hey, ${data['name']}!',
+                                    fontSize: 33.0,
+                                    fontWeight: FontWeight.w600,
+                                    textColor: Colors.black),
+                              );
                             } else {
                               // If data is null or empty
                               return const Text('No data available');

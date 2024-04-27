@@ -167,100 +167,6 @@ class SignUpScreen extends StatelessWidget {
                         hintText: 'Date of birth',
                         textEditingController: _signUpController.dayController,
                       ),
-                      // Container(
-                      //   height: 55,
-                      //   width: Get.width,
-                      //   decoration: BoxDecoration(
-                      //     color: const Color(0xffF2F0F0),
-                      //     borderRadius: BorderRadius.circular(40.0),
-                      //   ),
-                      //   child: Padding(
-                      //     padding: const EdgeInsets.only(
-                      //         left: 15.0, top: 10.0, bottom: 10.0),
-                      //     child: Row(
-                      //       mainAxisAlignment: MainAxisAlignment.center,
-                      //       crossAxisAlignment: CrossAxisAlignment.center,
-                      //       children: <Widget>[
-                      //         SizedBox(
-                      //           width: 60,
-                      //           child:
-                      //         ),
-                      //         Container(
-                      //           height: Get.height,
-                      //           width: 1,
-                      //           color: Colors.black,
-                      //         ),
-                      //         SizedBox(
-                      //           width: 110,
-                      //           child: TextFormField(
-                      //             controller: _signUpController.monthController,
-                      //             style: TextStyle(
-                      //               fontFamily:
-                      //                   GoogleFonts.openSans().fontFamily,
-                      //               fontSize: 19.0,
-                      //               fontWeight: FontWeight.w500,
-                      //             ),
-                      //             keyboardType: TextInputType.number,
-                      //             decoration: InputDecoration(
-                      //               errorBorder: const OutlineInputBorder(
-                      //                   borderSide: BorderSide.none),
-                      //               contentPadding: const EdgeInsets.only(
-                      //                   top: 10.0, left: 25.0, right: 25.0),
-                      //               enabledBorder: const OutlineInputBorder(
-                      //                   borderSide: BorderSide.none),
-                      //               focusedBorder: const OutlineInputBorder(
-                      //                   borderSide: BorderSide.none),
-                      //               hintText: 'Month',
-                      //               hintStyle: TextStyle(
-                      //                 color: const Color(0xffAAA3A3),
-                      //                 fontFamily:
-                      //                     GoogleFonts.openSans().fontFamily,
-                      //                 fontSize: 19.0,
-                      //                 fontWeight: FontWeight.w500,
-                      //               ),
-                      //             ),
-                      //           ),
-                      //         ),
-                      //         Container(
-                      //           height: Get.height,
-                      //           width: 1,
-                      //           color: Colors.black,
-                      //         ),
-                      //         SizedBox(
-                      //           width: 110,
-                      //           child: TextFormField(
-                      //             controller: _signUpController.yearController,
-                      //             style: TextStyle(
-                      //               fontFamily:
-                      //                   GoogleFonts.openSans().fontFamily,
-                      //               fontSize: 19.0,
-                      //               fontWeight: FontWeight.w500,
-                      //             ),
-                      //             keyboardType: TextInputType.number,
-                      //             decoration: InputDecoration(
-                      //               errorBorder: const OutlineInputBorder(
-                      //                   borderSide: BorderSide.none),
-                      //               contentPadding: const EdgeInsets.only(
-                      //                   top: 10.0, left: 25.0, right: 0.0),
-                      //               enabledBorder: const OutlineInputBorder(
-                      //                   borderSide: BorderSide.none),
-                      //               focusedBorder: const OutlineInputBorder(
-                      //                   borderSide: BorderSide.none),
-                      //               hintText: 'Year',
-                      //               hintStyle: TextStyle(
-                      //                 color: const Color(0xffAAA3A3),
-                      //                 fontFamily:
-                      //                     GoogleFonts.openSans().fontFamily,
-                      //                 fontSize: 19.0,
-                      //                 fontWeight: FontWeight.w500,
-                      //               ),
-                      //             ),
-                      //           ),
-                      //         ),
-                      //       ],
-                      //     ),
-                      //   ),
-                      // ),
                       Spaces.extrasmall,
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 5.0),
@@ -306,22 +212,33 @@ class SignUpScreen extends StatelessWidget {
                         fontSize: 24,
                         onTap: () {
                           if (_signUpController.signupKey.currentState!
-                                  .validate() &&
-                              _signUpController.isTick.value != false) {
-                            _signUpController.signUpUser(context);
-                          } else if (_signUpController.isTick.value == false) {
-                            ScaffoldMessenger.of(context).showSnackBar(
+                              .validate()) {
+                            if (_signUpController.dayController.text.isEmpty) {
+                              ScaffoldMessenger.of(context).showSnackBar(
                                 const SnackBar(
-                                    backgroundColor: Colors.red,
-                                    content: Text(
-                                        'Please tick the terms and condition')));
-                          } else if (_signUpController
-                              .dayController.text.isEmpty) {
-                            ScaffoldMessenger.of(context).showSnackBar(
+                                  backgroundColor: Colors.red,
+                                  content:
+                                      Text('Please select the date of birth'),
+                                ),
+                              );
+                            } else if (!_signUpController.isTick.value) {
+                              ScaffoldMessenger.of(context).showSnackBar(
                                 const SnackBar(
-                                    backgroundColor: Colors.red,
-                                    content:
-                                        Text('Please fill date of birth')));
+                                  backgroundColor: Colors.red,
+                                  content: Text(
+                                      'Please accept the terms and conditions'),
+                                ),
+                              );
+                            } else {
+                              _signUpController.signUpUser(context);
+                            }
+                          } else {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              const SnackBar(
+                                backgroundColor: Colors.red,
+                                content: Text('Please fill all fields'),
+                              ),
+                            );
                           }
                         },
                       ),

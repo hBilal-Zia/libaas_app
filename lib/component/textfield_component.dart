@@ -4,6 +4,7 @@ import 'package:google_fonts/google_fonts.dart';
 class TextFieldComponent extends StatefulWidget {
   final TextEditingController textEditingController;
   final String hintText;
+  final Color? hintColor;
   final bool? showSuffix;
   final bool? readOnly;
   final bool? calender;
@@ -16,6 +17,7 @@ class TextFieldComponent extends StatefulWidget {
     required this.textEditingController,
     required this.hintText,
     this.readOnly = false,
+    this.hintColor,
     this.calender = false,
     this.showSuffix = false,
     this.showPass = true,
@@ -73,7 +75,7 @@ class _TextFieldComponentState extends State<TextFieldComponent> {
                 : const SizedBox(),
         hintText: widget.hintText,
         hintStyle: TextStyle(
-          color: const Color(0xffAAA3A3),
+          color: widget.hintColor ?? const Color(0xffAAA3A3),
           fontFamily: GoogleFonts.openSans().fontFamily,
           fontSize: 24.0,
           fontWeight: FontWeight.w500,

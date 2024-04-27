@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 
 abstract class Spaces {
+  static const smallminus = SizedBox(
+    height: 5,
+  );
   static const smallh = SizedBox(
     height: 10,
   );
