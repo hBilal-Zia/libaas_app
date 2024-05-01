@@ -22,7 +22,7 @@ class HomeController extends GetxController {
   void onInit() {
     // Get called when controller is created
     super.onInit();
-    _initialize();
+    // _initialize();
   }
 
   Future<void> _initialize() async {

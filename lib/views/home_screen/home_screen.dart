@@ -11,6 +11,7 @@ import 'package:libaas_app/common_widget/text_global.dart';
 import 'package:libaas_app/component/appbar_component.dart';
 import 'package:libaas_app/component/button_component.dart';
 import 'package:libaas_app/views/home_screen/controller/home_controller.dart';
+import 'package:libaas_app/views/your_closet/your_closet_screen.dart';
 
 class HomeScreen extends StatelessWidget {
   HomeScreen({super.key});
@@ -282,7 +283,9 @@ class HomeScreen extends StatelessWidget {
                         itemBuilder: (context, index, realIdx) {
                           return GestureDetector(
                             onTap: () {
-                              debugPrint(index.toString());
+                              if (index == 1) {
+                                Get.to(YourClosetScreen());
+                              }
                             },
                             child: Center(
                                 child: Image.asset(imgList[index],
