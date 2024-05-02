@@ -52,9 +52,14 @@ class AddItemController extends GetxController {
 
   Future<String?> uploadImageToStorageAndGetURL(Uint8List imageBytes) async {
     try {
+      // Generate a unique file name for the image
+      String fileName = DateTime.now()
+          .millisecondsSinceEpoch
+          .toString(); // Requires uuid package
+
       // Create a reference to the location you want to upload to in Firebase Storage
       Reference storageReference =
-          FirebaseStorage.instance.ref().child('images').child('image.jpg');
+          FirebaseStorage.instance.ref().child('item/$fileName');
 
       // Upload the image to Firebase Storage
       TaskSnapshot uploadTask = await storageReference.putData(imageBytes);
@@ -76,7 +81,7 @@ class AddItemController extends GetxController {
 
   String? downloadURL;
   Future<void> uploadImage(File imageData) async {
-    const url = 'https://2bd4-38-10-169-123.ngrok-free.app/predict';
+    const url = 'https://0317-202-47-54-105.ngrok-free.app/predict';
 
     try {
       // Create a multipart request

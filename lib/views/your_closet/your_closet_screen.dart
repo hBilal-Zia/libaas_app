@@ -163,9 +163,35 @@ class YourClosetScreen extends StatelessWidget {
                                             height: Get.height,
                                             width: Get.width * 0.45,
                                             color: const Color(0xffC4C4C4),
-                                            child: Image.network(
-                                              item['image'],
-                                              fit: BoxFit.contain,
+                                            child: Stack(
+                                              alignment: Alignment.center,
+                                              children: [
+                                                Image.network(
+                                                  item['image'],
+                                                  fit: BoxFit.contain,
+                                                  loadingBuilder:
+                                                      (BuildContext context,
+                                                          Widget child,
+                                                          ImageChunkEvent?
+                                                              loadingProgress) {
+                                                    if (loadingProgress ==
+                                                        null) {
+                                                      return child; // Image is loaded, so show it
+                                                    } else {
+                                                      return CircularProgressIndicator(
+                                                        value: loadingProgress
+                                                                    .expectedTotalBytes !=
+                                                                null
+                                                            ? loadingProgress
+                                                                    .cumulativeBytesLoaded /
+                                                                loadingProgress
+                                                                    .expectedTotalBytes!
+                                                            : null,
+                                                      );
+                                                    }
+                                                  },
+                                                ),
+                                              ],
                                             ),
                                           ),
                                           Expanded(
