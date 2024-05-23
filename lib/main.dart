@@ -5,6 +5,7 @@ import 'package:libaas_app/firebase_options.dart';
 import 'package:libaas_app/views/home_screen/controller/home_controller.dart';
 import 'package:libaas_app/views/splash/splash.dart';
 import 'package:libaas_app/views/splash/splash_controller.dart';
+import 'package:libaas_app/views/week_planner/week_planner_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

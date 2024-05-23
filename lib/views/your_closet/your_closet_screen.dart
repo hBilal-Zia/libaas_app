@@ -1,7 +1,10 @@
+import 'dart:developer';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:libaas_app/common_widget/app_color.dart';
 import 'package:libaas_app/common_widget/container_global.dart';
 import 'package:libaas_app/common_widget/spaces.dart';
 import 'package:libaas_app/common_widget/text_global.dart';
@@ -179,6 +182,9 @@ class YourClosetScreen extends StatelessWidget {
                                                       return child; // Image is loaded, so show it
                                                     } else {
                                                       return CircularProgressIndicator(
+                                                        color: const Color
+                                                            .fromARGB(
+                                                            255, 54, 156, 98),
                                                         value: loadingProgress
                                                                     .expectedTotalBytes !=
                                                                 null
@@ -195,15 +201,66 @@ class YourClosetScreen extends StatelessWidget {
                                             ),
                                           ),
                                           Expanded(
-                                            child: Container(
-                                              alignment: Alignment.center,
+                                            child: SizedBox(
                                               height: Get.height,
-                                              child: textGlobalWidget(
-                                                  text:
-                                                      '${item['style']} ${item['category']}',
-                                                  fontSize: 14.0,
-                                                  fontWeight: FontWeight.w700,
-                                                  textColor: Colors.black),
+                                              child: Column(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.start,
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
+                                                children: [
+                                                  Align(
+                                                      alignment:
+                                                          Alignment.topRight,
+                                                      child: Padding(
+                                                        padding:
+                                                            const EdgeInsets
+                                                                .only(
+                                                                top: 10,
+                                                                right: 10),
+                                                        child: GestureDetector(
+                                                            onTap: () {
+                                                              FirebaseFirestore
+                                                                  .instance
+                                                                  .collection(
+                                                                      'clothes')
+                                                                  .doc(dataDocs[
+                                                                          index]
+                                                                      .id)
+                                                                  .delete();
+                                                              String code =
+                                                                  "Item deleted from your closet successfully!!";
+                                                              var snackbar =
+                                                                  SnackBar(
+                                                                content:
+                                                                    Text(code),
+                                                                backgroundColor:
+                                                                    Colors
+                                                                        .green,
+                                                              );
+                                                              // ignore: use_build_context_synchronously
+                                                              ScaffoldMessenger
+                                                                      .of(
+                                                                          context)
+                                                                  .showSnackBar(
+                                                                      snackbar);
+                                                            },
+                                                            child: const Icon(
+                                                                Icons.delete)),
+                                                      )),
+                                                  Spaces.mid,
+                                                  Center(
+                                                    child: textGlobalWidget(
+                                                        text:
+                                                            '${item['style']} ${item['category']}',
+                                                        fontSize: 14.0,
+                                                        fontWeight:
+                                                            FontWeight.w700,
+                                                        textColor:
+                                                            Colors.black),
+                                                  ),
+                                                ],
+                                              ),
                                             ),
                                           )
                                         ],

@@ -51,6 +51,7 @@ dependencies:
   convex_bottom_bar: ^3.2.0
   firebase_storage: ^11.6.9
   google_sign_in: ^6.2.1
+  dropdown_button2: ^2.3.9
 
 dev_dependencies:
   flutter_test:

@@ -11,6 +11,7 @@ import 'package:libaas_app/common_widget/text_global.dart';
 import 'package:libaas_app/component/appbar_component.dart';
 import 'package:libaas_app/component/button_component.dart';
 import 'package:libaas_app/views/home_screen/controller/home_controller.dart';
+import 'package:libaas_app/views/home_screen/nav_bar.dart';
 import 'package:libaas_app/views/your_closet/your_closet_screen.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -224,10 +225,20 @@ class HomeScreen extends StatelessWidget {
                                                     borderRadius:
                                                         BorderRadius.circular(
                                                             6.0)),
-                                                child: Image.network(
-                                                  'https://openweathermap.org/img/wn/${controller.weatherData?.weather?[0].icon}@2x.png',
-                                                  height: 40,
-                                                ),
+                                                child: controller
+                                                            .weatherData
+                                                            ?.weather?[0]
+                                                            .icon ==
+                                                        null
+                                                    ? const CircularProgressIndicator(
+                                                        value: 10,
+                                                        strokeWidth: 0.7,
+                                                        color: Colors.white,
+                                                      )
+                                                    : Image.network(
+                                                        'https://openweathermap.org/img/wn/${controller.weatherData?.weather?[0].icon}@2x.png',
+                                                        height: 40,
+                                                      ),
                                               ),
                                               textGlobalWidget(
                                                   text:
@@ -283,8 +294,16 @@ class HomeScreen extends StatelessWidget {
                         itemBuilder: (context, index, realIdx) {
                           return GestureDetector(
                             onTap: () {
+                              debugPrint(index.toString());
                               if (index == 1) {
                                 Get.to(YourClosetScreen());
+                              } else if (index == 2) {
+                                Navigator.pushReplacement(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) =>
+                                          const NavBar(initialIndex: 2)),
+                                );
                               }
                             },
                             child: Center(

@@ -5,11 +5,14 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:libaas_app/common_widget/app_color.dart';
 import 'package:libaas_app/views/add_item/add_item_screen.dart';
 import 'package:libaas_app/views/auth/setting_screen/setting_screen.dart';
+import 'package:libaas_app/views/create_outfit/create_outfit_screen.dart';
 import 'package:libaas_app/views/home_screen/home_screen.dart';
 import 'package:libaas_app/views/notification_screen/notification_screen.dart';
 
 class NavBar extends StatefulWidget {
-  const NavBar({super.key});
+  final int initialIndex;
+
+  const NavBar({super.key, this.initialIndex = 0});
 
   @override
   _NavBarState createState() => _NavBarState();
@@ -20,11 +23,18 @@ class _NavBarState extends State<NavBar> {
   final _pageController = PageController();
   final _pageNo = [
     HomeScreen(),
-    Container(color: Colors.red),
+    const CreateOutfitScreen(),
     AddItemScreen(),
     const NotificationScreen(),
     const SettingScreen()
   ];
+
+  @override
+  void initState() {
+    super.initState();
+    _currentPage = widget.initialIndex;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

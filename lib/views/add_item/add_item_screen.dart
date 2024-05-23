@@ -275,7 +275,9 @@ class AddItemScreen extends StatelessWidget {
                         child: SizedBox(
                           width: 50,
                           height: 50,
-                          child: CircularProgressIndicator(),
+                          child: CircularProgressIndicator(
+                            color: Color.fromARGB(255, 54, 156, 98),
+                          ),
                         ),
                       ),
                     )
