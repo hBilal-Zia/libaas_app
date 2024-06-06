@@ -43,7 +43,11 @@ class AddItemController extends GetxController {
   late Uint8List bytes;
   Future<void> addItemFirebase(Map<String, dynamic> data) async {
     try {
-      await FirebaseFirestore.instance.collection('clothes').doc().set(data);
+      DocumentReference docRef =
+          FirebaseFirestore.instance.collection('clothes').doc();
+      String clotheId = docRef.id;
+      data['clotheId'] = clotheId;
+      await docRef.set(data);
     } catch (e) {
       debugPrint("Error adding data to Firestore: $e");
       // Handle error as needed
@@ -81,7 +85,7 @@ class AddItemController extends GetxController {
 
   String? downloadURL;
   Future<void> uploadImage(File imageData) async {
-    const url = 'https://7e6f-38-10-169-61.ngrok-free.app/classify';
+    const url = 'https://de36-38-10-169-61.ngrok-free.app/classify';
 
     try {
       // Create a multipart request

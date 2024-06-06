@@ -53,7 +53,7 @@ class AddItemScreen extends StatelessWidget {
                       'image': _addItemController.downloadURL,
                       'userId': _auth.currentUser!.uid,
                       'recentlyUsed': true,
-                      'lastUsed': formattedDateTime
+                      'lastUsed': formattedDateTime,
                     });
                     _addItemController.updateImage();
                     _addItemController.isValue.value = false;
