@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:dropdown_button2/dropdown_button2.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
@@ -12,7 +13,8 @@ import 'package:libaas_app/component/button_component.dart';
 import 'package:libaas_app/component/dropdown_widget.dart';
 import 'package:libaas_app/views/create_outfit/controller/create_outfit_controller.dart';
 import 'package:libaas_app/views/home_screen/controller/home_controller.dart';
-import 'package:libaas_app/views/week_planner/week_planner_screen.dart';
+import 'package:libaas_app/views/week_planner/controller/recommend_outfit_controller.dart';
+import 'package:libaas_app/views/week_planner/recommend_outfit_screen.dart';
 
 import '../../common_widget/app_color.dart';
 
@@ -26,6 +28,9 @@ class CreateOutfitScreen extends StatefulWidget {
 class _CreateOutfitScreenState extends State<CreateOutfitScreen> {
   final CreateOutfitController _createOutfitController =
       Get.put(CreateOutfitController());
+  final HomeController _homeController = Get.find();
+  final RecommendedOutfitController _recommendedOutfitController =
+      Get.put(RecommendedOutfitController());
   @override
   Widget build(BuildContext context) {
     DateTime now = DateTime.now();
@@ -244,23 +249,80 @@ class _CreateOutfitScreenState extends State<CreateOutfitScreen> {
                     child: Padding(
                       padding: const EdgeInsets.only(right: 15.0, left: 15.0),
                       child: CustDropDown(
+                        maxListHeight: Get.height * 0.15,
                         items: const [
                           CustDropdownMenuItem(
-                            value: 'Sports',
-                            child: Text("Sports"),
+                            value: 'Wedding',
+                            child: Text("Wedding"),
+                          ),
+                          CustDropdownMenuItem(
+                            value: 'Valima',
+                            child: Text("Valima"),
+                          ),
+                          CustDropdownMenuItem(
+                            value: 'Business',
+                            child: Text("Business"),
+                          ),
+                          CustDropdownMenuItem(
+                            value: 'Presentation',
+                            child: Text("Presentation"),
+                          ),
+                          CustDropdownMenuItem(
+                            value: 'Convocation',
+                            child: Text("Convocation"),
+                          ),
+                          CustDropdownMenuItem(
+                            value: 'Eid',
+                            child: Text("Eid"),
+                          ),
+                          CustDropdownMenuItem(
+                            value: 'Party',
+                            child: Text("Party"),
                           ),
                           CustDropdownMenuItem(
                             value: 'Picnic',
                             child: Text("Picnic"),
                           ),
                           CustDropdownMenuItem(
-                            value: 'Concert',
-                            child: Text("Concert"),
+                            value: 'Friends Meetup',
+                            child: Text("Friends Meetup"),
                           ),
                           CustDropdownMenuItem(
-                            value: 'Parties',
-                            child: Text("Parties"),
-                          )
+                            value: 'Shopping',
+                            child: Text("Shopping"),
+                          ),
+                          CustDropdownMenuItem(
+                            value: 'Sport',
+                            child: Text("Sport"),
+                          ),
+                          CustDropdownMenuItem(
+                            value: 'Family Gathering',
+                            child: Text("Family Gathering"),
+                          ),
+                          CustDropdownMenuItem(
+                            value: 'Hiking',
+                            child: Text("Hiking"),
+                          ),
+                          CustDropdownMenuItem(
+                            value: 'Concerts',
+                            child: Text("Concerts"),
+                          ),
+                          CustDropdownMenuItem(
+                            value: 'Outing',
+                            child: Text("Outing"),
+                          ),
+                          CustDropdownMenuItem(
+                            value: 'Mehndi/Mayon',
+                            child: Text("Mehndi/Mayon"),
+                          ),
+                          CustDropdownMenuItem(
+                            value: 'Birthday',
+                            child: Text("Birthday"),
+                          ),
+                          CustDropdownMenuItem(
+                            value: 'Anniversary',
+                            child: Text("Anniversary"),
+                          ),
                         ],
                         hintText: "Event",
                         borderRadius: 5,
@@ -289,23 +351,44 @@ class _CreateOutfitScreenState extends State<CreateOutfitScreen> {
                     child: Padding(
                       padding: const EdgeInsets.only(right: 15.0, left: 15.0),
                       child: CustDropDown(
+                        maxListHeight: Get.height * 0.15,
                         items: const [
                           CustDropdownMenuItem(
-                            value: 'Holidays',
-                            child: Text("Holidays"),
+                            value: 'University',
+                            child: Text("University"),
                           ),
                           CustDropdownMenuItem(
-                            value: 'Traditional days',
-                            child: Text("Traditional days"),
+                            value: 'Home',
+                            child: Text("Home"),
                           ),
                           CustDropdownMenuItem(
-                            value: 'Wedding',
-                            child: Text("Wedding"),
+                            value: 'Hall/Banquet',
+                            child: Text("Hall/Banquet"),
                           ),
                           CustDropdownMenuItem(
-                            value: 'Conferences',
-                            child: Text("Conferences"),
-                          )
+                            value: 'Restaurant',
+                            child: Text("Restaurant"),
+                          ),
+                          CustDropdownMenuItem(
+                            value: 'Park/Ground',
+                            child: Text("Park/Ground"),
+                          ),
+                          CustDropdownMenuItem(
+                            value: 'Beach',
+                            child: Text("Beach"),
+                          ),
+                          CustDropdownMenuItem(
+                            value: 'Mall',
+                            child: Text("Mall"),
+                          ),
+                          CustDropdownMenuItem(
+                            value: 'Market/Bazar',
+                            child: Text("Market/Bazar"),
+                          ),
+                          CustDropdownMenuItem(
+                            value: 'Office',
+                            child: Text("Office"),
+                          ),
                         ],
                         hintText: "Venue",
                         borderRadius: 5,
@@ -322,17 +405,25 @@ class _CreateOutfitScreenState extends State<CreateOutfitScreen> {
                       padding: const EdgeInsets.symmetric(horizontal: 40.0),
                       child: GestureDetector(
                         onTap: () {
-                          Get.to(WeekPlannerScreen());
+                          String userId =
+                              FirebaseAuth.instance.currentUser!.uid;
+                          _recommendedOutfitController.recommendationData(
+                              'MQHQ1fm51ZgcbfYIEhaDSidGEKu2',
+                              _homeController.temp!.toInt().toString(),
+                              _createOutfitController.eventValue,
+                              _createOutfitController.venueValue);
+
+                          Get.to(RecommendedOutFitScreen());
                         },
                         child: Container(
                           alignment: Alignment.center,
-                          width: Get.width * 0.35,
+                          width: Get.width * 0.39,
                           height: 40,
                           decoration: BoxDecoration(
                               color: ColorConstraint.primaryColor,
                               borderRadius: BorderRadius.circular(20.0)),
                           child: textGlobalWidget(
-                              text: 'Weekly Planner',
+                              text: 'Recommended Outfit',
                               fontSize: 14,
                               fontWeight: FontWeight.w700,
                               textColor: Colors.white),

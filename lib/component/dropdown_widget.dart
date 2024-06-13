@@ -116,7 +116,10 @@ class _CustDropDownState extends State<CustDropDown>
                   padding: const EdgeInsets.only(top: 30),
                   child: Container(
                     clipBehavior: Clip.antiAliasWithSaveLayer,
-                    constraints: BoxConstraints(maxWidth: size.width),
+                    constraints: BoxConstraints(
+                      maxWidth: size.width,
+                      maxHeight: widget.maxListHeight,
+                    ), // Set max height
                     decoration: BoxDecoration(
                       color: Colors.white,
                       borderRadius: BorderRadius.circular(5),

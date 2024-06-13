@@ -127,7 +127,7 @@ class AppBarComponent extends StatelessWidget {
                     width: 10.0), // Adjust the spacing between icon and title
                 textGlobalWidget(
                     text: title ?? 'Term and Condition',
-                    fontSize: 30.0,
+                    fontSize: 28.0,
                     fontWeight: FontWeight.w500,
                     textColor: Colors.black),
               ],
