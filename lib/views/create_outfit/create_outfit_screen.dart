@@ -328,12 +328,26 @@ class _CreateOutfitScreenState extends State<CreateOutfitScreen> {
                         borderRadius: 5,
                         onChanged: (val) {
                           _createOutfitController.eventValue = val;
+                          _createOutfitController.update();
                           log(_createOutfitController.eventValue);
                         },
                       ),
                     ),
                   ),
-                  Spaces.large,
+                  Spaces.smallh,
+                  Center(
+                      child: GetBuilder<CreateOutfitController>(
+                    init: CreateOutfitController(),
+                    builder: (controller) {
+                      return textGlobalWidget(
+                          text: controller.eventValue,
+                          fontSize: 15.0,
+                          fontWeight: FontWeight.w600,
+                          textAlign: TextAlign.start,
+                          textColor: Colors.black);
+                    },
+                  )),
+                  Spaces.smallh,
                   Container(
                     alignment: Alignment.center,
                     height: Get.width * 0.25,
@@ -394,12 +408,26 @@ class _CreateOutfitScreenState extends State<CreateOutfitScreen> {
                         borderRadius: 5,
                         onChanged: (val) {
                           _createOutfitController.venueValue = val;
+                          _createOutfitController.update();
                           log(_createOutfitController.venueValue);
                         },
                       ),
                     ),
                   ),
-                  Spaces.large,
+                  Spaces.smallh,
+                  Center(
+                      child: GetBuilder<CreateOutfitController>(
+                    init: CreateOutfitController(),
+                    builder: (controller) {
+                      return textGlobalWidget(
+                          text: controller.venueValue,
+                          fontSize: 15.0,
+                          fontWeight: FontWeight.w600,
+                          textAlign: TextAlign.start,
+                          textColor: Colors.black);
+                    },
+                  )),
+                  Spaces.smallh,
                   Center(
                     child: Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 40.0),
