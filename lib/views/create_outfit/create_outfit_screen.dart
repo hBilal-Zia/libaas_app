@@ -435,13 +435,150 @@ class _CreateOutfitScreenState extends State<CreateOutfitScreen> {
                         onTap: () {
                           String userId =
                               FirebaseAuth.instance.currentUser!.uid;
-                          _recommendedOutfitController.recommendationData(
-                              'MQHQ1fm51ZgcbfYIEhaDSidGEKu2',
-                              _homeController.temp!.toInt().toString(),
-                              _createOutfitController.eventValue,
-                              _createOutfitController.venueValue);
 
-                          Get.to(RecommendedOutFitScreen());
+                          // Get the selected values
+                          String event = _createOutfitController.eventValue;
+                          String venue = _createOutfitController.venueValue;
+
+                          // Define valid combinations (you can customize this as per your requirements)
+                          Map<String, List<String>> validCombinations = {
+                            'Wedding': [
+                              'Hall/Banquet',
+                              'Home',
+                              'Park/Ground',
+                              'Beach'
+                            ],
+                            'Valima': [
+                              'Hall/Banquet',
+                              'Home',
+                              'Park/Ground',
+                              'Beach'
+                            ],
+                            'Business': [
+                              'Office',
+                              'Restaurant',
+                              'Hall/Banquet',
+                              'University'
+                            ],
+                            'Presentation': [
+                              'Office',
+                              'University',
+                              'Hall/Banquet',
+                              'Restaurant'
+                            ],
+                            'Convocation': [
+                              'University',
+                              'Hall/Banquet',
+                              'Restaurant',
+                              'Park/Ground'
+                            ],
+                            'Eid': [
+                              'Home',
+                              'Restaurant',
+                              'Hall/Banquet',
+                            ],
+                            'Party': [
+                              'Hall/Banquet',
+                              'Restaurant',
+                              'Park/Ground',
+                              'Beach'
+                            ],
+                            'Picnic': ['Beach'],
+                            'Friends Meetup': [
+                              'University',
+                              'Home',
+                              'Restaurant'
+                            ],
+                            'Shopping': ['Mall', 'Market/Bazar'],
+                            'Sport': [
+                              'University',
+                              'Park/Ground',
+                            ],
+                            'Family Gathering': [
+                              'Home',
+                              'Hall/Banquet',
+                              'Restaurant',
+                            ],
+                            'Hiking': [
+                              'Park/Ground',
+                            ],
+                            'Concerts': [
+                              'University',
+                              'Hall/Banquet',
+                              'Restaurant',
+                              'Park/Ground',
+                              'Beach',
+                              'Mall',
+                            ],
+                            'Outing': [
+                              'Restaurant',
+                              'Park/Ground',
+                              'Beach',
+                            ],
+                            'Mehndi/Mayon': [
+                              'Home',
+                              'Hall/Banquet',
+                              'Restaurant',
+                              'Park/Ground',
+                            ],
+                            'Birthday': [
+                              'Home',
+                              'Hall/Banquet',
+                              'Restaurant',
+                              'Park/Ground',
+                            ],
+                            'Anniversary': [
+                              'Home',
+                              'Hall/Banquet',
+                              'Restaurant',
+                              'Park/Ground',
+                            ]
+                          };
+
+                          // Check if the selected combination is valid
+                          if (validCombinations.containsKey(event) &&
+                              !validCombinations[event]!.contains(venue)) {
+                            // Invalid combination, show a message
+                            showDialog(
+                              context: context,
+                              builder: (context) => AlertDialog(
+                                title: textGlobalWidget(
+                                    text: 'Invalid Selection',
+                                    fontSize: 24.0,
+                                    fontWeight: FontWeight.w700,
+                                    textColor: ColorConstraint.primaryColor),
+                                content: textGlobalWidget(
+                                    text:
+                                        'The selected event and venue do not match. Please select a valid combination.',
+                                    fontSize: 14.0,
+                                    fontWeight: FontWeight.w500,
+                                    textColor: Colors.black),
+                                actions: <Widget>[
+                                  TextButton(
+                                    onPressed: () {
+                                      Navigator.of(context).pop();
+                                    },
+                                    child: const Text(
+                                      'OK',
+                                      style: TextStyle(
+                                          fontSize: 18.0,
+                                          fontWeight: FontWeight.w700,
+                                          color: ColorConstraint.primaryColor),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            );
+                          } else {
+                            // Valid combination, proceed to fetch recommended outfit
+                            _recommendedOutfitController.recommendationData(
+                                'MQHQ1fm51ZgcbfYIEhaDSidGEKu2',
+                                _homeController.temp!.toInt().toString(),
+                                event,
+                                venue);
+
+                            Get.to(RecommendedOutFitScreen());
+                          }
                         },
                         child: Container(
                           alignment: Alignment.center,

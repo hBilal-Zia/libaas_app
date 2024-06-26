@@ -15,7 +15,7 @@ Widget textGlobalWidget(
         color: textColor ?? const Color(0xff030303),
         fontWeight: fontWeight ?? FontWeight.w500,
         fontSize: fontSize ?? 16.0),
-    maxLines: 2,
+    maxLines: 3,
     textAlign: textAlign ?? TextAlign.center,
   );
 }
