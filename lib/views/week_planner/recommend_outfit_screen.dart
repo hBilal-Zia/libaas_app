@@ -75,69 +75,81 @@ class RecommendedOutFitScreen extends StatelessWidget {
                         : SizedBox(
                             height: Get.height * 0.7,
                             width: Get.width,
-                            child: CarouselSlider.builder(
-                              itemCount: controller.recommendedData.length,
-                              options: CarouselOptions(
-                                autoPlay: false,
-                                aspectRatio: 0.1,
-                                enableInfiniteScroll: false,
-                                enlargeCenterPage: true,
-                              ),
-                              itemBuilder: (context, index, realIdx) {
-                                final item = controller.recommendedData[index];
-                                return Column(
-                                  children: [
-                                    // textGlobalWidget(
-                                    //     text: item['date'],
-                                    //     fontSize: 20.0,
-                                    //     fontWeight: FontWeight.w700,
-                                    //     textColor: Colors.black),
-                                    // textGlobalWidget(
-                                    //     text: item['day'],
-                                    //     fontSize: 20.0,
-                                    //     fontWeight: FontWeight.w700,
-                                    //     textColor: Colors.black),
-                                    Spaces.smallh,
-                                    Container(
-                                      height: Get.height * 0.45,
-                                      width: Get.width * 0.66,
-                                      decoration: BoxDecoration(
-                                          color: Colors.white,
-                                          borderRadius:
-                                              BorderRadius.circular(20.0)),
-                                      child: Padding(
-                                        padding: const EdgeInsets.all(8.0),
-                                        child: Stack(
-                                          children: [
-                                            Positioned(
-                                                bottom: 0,
-                                                right: 0,
-                                                child: Image.network(
-                                                  item.bottomwearImageUrl,
-                                                  height: 200,
-                                                )),
-                                            Positioned(
-                                                top: 0,
-                                                left: 0,
-                                                child: Image.network(
-                                                  item.topImageUrl,
-                                                  height: 200,
-                                                )),
-                                            Positioned(
-                                                bottom: 0,
-                                                left: 0,
-                                                child: Image.network(
-                                                  item.footwearImageUrl,
-                                                  height: 200,
-                                                ))
-                                          ],
-                                        ),
-                                      ),
-                                    )
-                                  ],
-                                );
-                              },
-                            ));
+                            child: controller.recommendedData.isEmpty
+                                ? Center(
+                                    child: textGlobalWidget(
+                                        text: 'No Outfit Recommended',
+                                        fontSize: 19,
+                                        fontWeight: FontWeight.w700,
+                                        textColor: Colors.black),
+                                  )
+                                : CarouselSlider.builder(
+                                    itemCount:
+                                        controller.recommendedData.length,
+                                    options: CarouselOptions(
+                                      autoPlay: false,
+                                      aspectRatio: 0.1,
+                                      enableInfiniteScroll: false,
+                                      enlargeCenterPage: true,
+                                    ),
+                                    itemBuilder: (context, index, realIdx) {
+                                      final item =
+                                          controller.recommendedData[index];
+                                      return Column(
+                                        children: [
+                                          // textGlobalWidget(
+                                          //     text: item['date'],
+                                          //     fontSize: 20.0,
+                                          //     fontWeight: FontWeight.w700,
+                                          //     textColor: Colors.black),
+                                          // textGlobalWidget(
+                                          //     text: item['day'],
+                                          //     fontSize: 20.0,
+                                          //     fontWeight: FontWeight.w700,
+                                          //     textColor: Colors.black),
+                                          Spaces.smallh,
+                                          Container(
+                                            height: Get.height * 0.45,
+                                            width: Get.width * 0.66,
+                                            decoration: BoxDecoration(
+                                                color: Colors.white,
+                                                borderRadius:
+                                                    BorderRadius.circular(
+                                                        20.0)),
+                                            child: Padding(
+                                              padding:
+                                                  const EdgeInsets.all(8.0),
+                                              child: Stack(
+                                                children: [
+                                                  Positioned(
+                                                      bottom: 0,
+                                                      right: 0,
+                                                      child: Image.network(
+                                                        item.bottomwearImageUrl,
+                                                        height: 200,
+                                                      )),
+                                                  Positioned(
+                                                      top: 0,
+                                                      left: 0,
+                                                      child: Image.network(
+                                                        item.topImageUrl,
+                                                        height: 200,
+                                                      )),
+                                                  Positioned(
+                                                      bottom: 0,
+                                                      left: 0,
+                                                      child: Image.network(
+                                                        item.footwearImageUrl,
+                                                        height: 200,
+                                                      ))
+                                                ],
+                                              ),
+                                            ),
+                                          )
+                                        ],
+                                      );
+                                    },
+                                  ));
                   },
                 )
               ]),

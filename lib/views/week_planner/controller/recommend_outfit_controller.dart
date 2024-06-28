@@ -20,7 +20,7 @@ class RecommendedOutfitController extends GetxController {
 
   Future<void> recommendationData(
       String userId, String temp, String eventVal, String venueVal) async {
-    const url = 'https://4528-38-10-164-70.ngrok-free.app/recommendation';
+    const url = 'https://8cb4-38-10-174-236.ngrok-free.app/recommendation';
     Map<String, String> params = {
       'user_id': userId,
       'temperature': temp,
