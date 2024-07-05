@@ -3,9 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:libaas_app/firebase_options.dart';
 import 'package:libaas_app/views/home_screen/controller/home_controller.dart';
+import 'package:libaas_app/views/recommended/select_outfit_screen.dart';
 import 'package:libaas_app/views/splash/splash.dart';
 import 'package:libaas_app/views/splash/splash_controller.dart';
-import 'package:libaas_app/views/week_planner/recommend_outfit_screen.dart';
+import 'package:libaas_app/views/recommended/recommend_outfit_screen.dart';
+import 'package:libaas_app/views/week_planner/weekly_planner_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

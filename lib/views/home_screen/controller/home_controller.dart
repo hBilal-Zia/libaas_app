@@ -2,11 +2,14 @@ import 'dart:async';
 import 'dart:convert';
 import 'dart:developer';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
+import 'package:intl/intl.dart';
 import 'package:libaas_app/views/home_screen/model/weather_model.dart';
 
 class HomeController extends GetxController {
@@ -24,6 +27,42 @@ class HomeController extends GetxController {
     super.onInit();
     _initialize();
   }
+
+  // final FirebaseAuth _auth = FirebaseAuth.instance;
+
+  // Future<void> fetchFirestoreData() async {
+  //   try {
+  //     QuerySnapshot querySnapshot = await FirebaseFirestore.instance
+  //         .collection('weekplanner')
+  //         .where('outfitUserId', isEqualTo: _auth.currentUser!.uid)
+  //         .get();
+
+  //     // Process documents and schedule notifications
+  //     // Process documents and schedule notifications
+  //     final currentTime = DateTime.now();
+  //     final DateFormat dateFormat = DateFormat('MM/dd/yyyy hh:mm a');
+
+  //     for (var doc in querySnapshot.docs) {
+  //       String dateString =
+  //           doc['date']; // Assuming 'date' is the key for the date string
+  //       DateTime date = dateFormat.parse(dateString);
+
+  //       // Calculate notification time 2 hours before 'date'
+  //       DateTime notificationTime = date.subtract(const Duration(hours: 2));
+
+  //       if (currentTime.year == date.year &&
+  //           currentTime.month == date.month &&
+  //           currentTime.day == date.day &&
+  //           currentTime.isBefore(date) &&
+  //           notificationTime.difference(currentTime).inHours <= 2) {
+  //         // Schedule notification
+  //         log(notificationTime.toString());
+  //       }
+  //     }
+  //   } catch (e) {
+  //     print('Error fetching Firestore data: $e');
+  //   }
+  // }
 
   Future<void> _initialize() async {
     isLoaded = true;

@@ -12,6 +12,7 @@ import 'package:libaas_app/component/appbar_component.dart';
 import 'package:libaas_app/component/button_component.dart';
 import 'package:libaas_app/views/home_screen/controller/home_controller.dart';
 import 'package:libaas_app/views/home_screen/nav_bar.dart';
+import 'package:libaas_app/views/week_planner/weekly_planner_screen.dart';
 import 'package:libaas_app/views/your_closet/your_closet_screen.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -304,6 +305,8 @@ class HomeScreen extends StatelessWidget {
                                       builder: (context) =>
                                           const NavBar(initialIndex: 2)),
                                 );
+                              } else if (index == 0) {
+                                Get.to(WeeklyPlannerScreen());
                               }
                             },
                             child: Center(

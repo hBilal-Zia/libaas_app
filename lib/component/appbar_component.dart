@@ -84,7 +84,7 @@ class AppBarComponent extends StatelessWidget {
                           padding: EdgeInsets.symmetric(
                               horizontal: 11.0, vertical: 2.0),
                           child: Text(
-                            'Done',
+                            'Save',
                             style:
                                 TextStyle(color: Colors.white, fontSize: 18.0),
                           ),

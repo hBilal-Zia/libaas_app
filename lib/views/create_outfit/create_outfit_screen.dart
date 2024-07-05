@@ -13,8 +13,8 @@ import 'package:libaas_app/component/button_component.dart';
 import 'package:libaas_app/component/dropdown_widget.dart';
 import 'package:libaas_app/views/create_outfit/controller/create_outfit_controller.dart';
 import 'package:libaas_app/views/home_screen/controller/home_controller.dart';
-import 'package:libaas_app/views/week_planner/controller/recommend_outfit_controller.dart';
-import 'package:libaas_app/views/week_planner/recommend_outfit_screen.dart';
+import 'package:libaas_app/views/recommended/controller/recommend_outfit_controller.dart';
+import 'package:libaas_app/views/recommended/recommend_outfit_screen.dart';
 
 import '../../common_widget/app_color.dart';
 
