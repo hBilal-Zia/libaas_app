@@ -443,95 +443,57 @@ class _CreateOutfitScreenState extends State<CreateOutfitScreen> {
                           // Define valid combinations (you can customize this as per your requirements)
                           Map<String, List<String>> validCombinations = {
                             'Wedding': [
-                              'Hall/Banquet',
-                              'Home',
-                              'Park/Ground',
-                              'Beach'
+                              "Hall/Banquet",
+                              "Restaurant",
+                              "Park/Ground",
+                              "Home"
                             ],
-                            'Valima': [
-                              'Hall/Banquet',
-                              'Home',
-                              'Park/Ground',
-                              'Beach'
-                            ],
-                            'Business': [
-                              'Office',
-                              'Restaurant',
-                              'Hall/Banquet',
-                              'University'
-                            ],
-                            'Presentation': [
-                              'Office',
-                              'University',
-                              'Hall/Banquet',
-                              'Restaurant'
-                            ],
-                            'Convocation': [
-                              'University',
-                              'Hall/Banquet',
-                              'Restaurant',
-                              'Park/Ground'
-                            ],
-                            'Eid': [
-                              'Home',
-                              'Restaurant',
-                              'Hall/Banquet',
-                            ],
+                            'Valima': ["Hall/Banquet", "Restaurant", "Home"],
+                            'Business': ["Office", "Restaurant"],
+                            'Presentation': ["University", "Office"],
+                            'Convocation': ["University", "Hall/Banquet"],
+                            'Eid': ["Home", "Park/Ground", "Restaurant"],
                             'Party': [
-                              'Hall/Banquet',
-                              'Restaurant',
-                              'Park/Ground',
-                              'Beach'
+                              "Home",
+                              "Hall/Banquet",
+                              "Restaurant",
+                              "Park/Ground",
+                              "Beach"
                             ],
-                            'Picnic': ['Beach'],
+                            'Picnic': ["Park/Ground", "Beach"],
                             'Friends Meetup': [
-                              'University',
-                              'Home',
-                              'Restaurant'
+                              "Home",
+                              "Restaurant",
+                              "Mall",
+                              "Park/Ground",
+                              "Beach"
                             ],
-                            'Shopping': ['Mall', 'Market/Bazar'],
-                            'Sport': [
-                              'University',
-                              'Park/Ground',
-                            ],
+                            'Shopping': ["Mall", "Market/Bazar"],
+                            'Sport': ["Park/Ground", "Beach"],
                             'Family Gathering': [
-                              'Home',
-                              'Hall/Banquet',
-                              'Restaurant',
+                              "Home",
+                              "Park/Ground",
+                              "Restaurant"
                             ],
-                            'Hiking': [
-                              'Park/Ground',
-                            ],
-                            'Concerts': [
-                              'University',
-                              'Hall/Banquet',
-                              'Restaurant',
-                              'Park/Ground',
-                              'Beach',
-                              'Mall',
-                            ],
+                            'Hiking': ["Park/Ground"],
+                            'Concerts': ["Park/Ground", "Hall/Banquet"],
                             'Outing': [
-                              'Restaurant',
-                              'Park/Ground',
-                              'Beach',
+                              "Park/Ground",
+                              "Beach",
+                              "Restaurant",
+                              "Mall"
                             ],
-                            'Mehndi/Mayon': [
-                              'Home',
-                              'Hall/Banquet',
-                              'Restaurant',
-                              'Park/Ground',
-                            ],
+                            'Mehndi/Mayon': ["Hall/Banquet", "Home"],
                             'Birthday': [
-                              'Home',
-                              'Hall/Banquet',
-                              'Restaurant',
-                              'Park/Ground',
+                              "Home",
+                              "Restaurant",
+                              "Park/Ground",
+                              "Hall/Banquet"
                             ],
                             'Anniversary': [
-                              'Home',
-                              'Hall/Banquet',
-                              'Restaurant',
-                              'Park/Ground',
+                              "Restaurant",
+                              "Home",
+                              "Hall/Banquet"
                             ]
                           };
 

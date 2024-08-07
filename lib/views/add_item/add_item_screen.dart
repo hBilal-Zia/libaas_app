@@ -13,9 +13,16 @@ import 'package:http/http.dart' as http;
 
 import '../../common_widget/text_global.dart';
 
-class AddItemScreen extends StatelessWidget {
-  AddItemScreen({super.key});
+class AddItemScreen extends StatefulWidget {
+  const AddItemScreen({super.key});
+
+  @override
+  State<AddItemScreen> createState() => _AddItemScreenState();
+}
+
+class _AddItemScreenState extends State<AddItemScreen> {
   final AddItemController _addItemController = Get.put(AddItemController());
+
   final FirebaseAuth _auth = FirebaseAuth.instance;
 
   @override
@@ -127,135 +134,315 @@ class AddItemScreen extends StatelessWidget {
                             ),
                           )),
                           Spaces.mid,
-                          TextFieldComponent(
-                            hintColor: const Color(0xff24686D).withOpacity(0.6),
-                            readOnly: true,
-                            validator: FormValidator.validateName,
-                            hintText: 'Style',
-                            textEditingController:
-                                _addItemController.descController,
+                          Obx(
+                            () => TextFieldComponent(
+                              hintColor:
+                                  const Color(0xff24686D).withOpacity(0.6),
+                              readOnly:
+                                  !_addItemController.isEditingStyle.value,
+                              validator: FormValidator.validateName,
+                              hintText: 'Style',
+                              textEditingController:
+                                  _addItemController.descController,
+                            ),
                           ),
                           Spaces.smallh,
                           Obx(() {
                             return Visibility(
                               visible: _addItemController.isValue.value,
                               child: _addItemController.jsonResponse.isNotEmpty
-                                  ? Center(
-                                      child: textGlobalWidget(
-                                          text: _addItemController
-                                                  .jsonResponse['features']
-                                              ['Style'],
-                                          fontSize: 15.0,
-                                          fontWeight: FontWeight.w600,
-                                          textAlign: TextAlign.start,
-                                          textColor: Colors.black),
+                                  ? Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Container(),
+                                        textGlobalWidget(
+                                            text: _addItemController
+                                                    .jsonResponse['features']
+                                                ['Style'],
+                                            fontSize: 15.0,
+                                            fontWeight: FontWeight.w600,
+                                            textAlign: TextAlign.start,
+                                            textColor: Colors.black),
+                                        GestureDetector(
+                                            onTap: () {
+                                              if (_addItemController
+                                                  .isEditingStyle.value) {
+                                                _addItemController.jsonResponse[
+                                                        'features']['Style'] =
+                                                    _addItemController
+                                                        .descController.text;
+                                                _addItemController
+                                                    .descController
+                                                    .clear();
+                                              } else {
+                                                _addItemController
+                                                    .descController
+                                                    .text = _addItemController
+                                                        .jsonResponse[
+                                                    'features']['Style'];
+                                              }
+                                              _addItemController
+                                                      .isEditingStyle.value =
+                                                  !_addItemController
+                                                      .isEditingStyle.value;
+                                            },
+                                            child: Icon(_addItemController
+                                                    .isEditingStyle.value
+                                                ? Icons.check
+                                                : Icons.edit)),
+                                      ],
                                     )
                                   : Container(),
                             );
                           }),
                           Spaces.smallh,
-                          TextFieldComponent(
-                            hintColor: const Color(0xff24686D).withOpacity(0.6),
-                            readOnly: true,
-                            validator: FormValidator.validateName,
-                            hintText: 'Category',
-                            textEditingController:
-                                _addItemController.categoryController,
+                          Obx(
+                            () => TextFieldComponent(
+                              hintColor:
+                                  const Color(0xff24686D).withOpacity(0.6),
+                              readOnly:
+                                  !_addItemController.isEditingCtgry.value,
+                              validator: FormValidator.validateName,
+                              hintText: 'Category',
+                              textEditingController:
+                                  _addItemController.categoryController,
+                            ),
                           ),
                           Spaces.smallh,
                           Obx(() {
                             return Visibility(
                               visible: _addItemController.isValue.value,
                               child: _addItemController.jsonResponse.isNotEmpty
-                                  ? Center(
-                                      child: textGlobalWidget(
-                                          text: _addItemController
-                                                  .jsonResponse['features']
-                                              ['Wear Type'],
-                                          fontSize: 15.0,
-                                          fontWeight: FontWeight.w600,
-                                          textAlign: TextAlign.start,
-                                          textColor: Colors.black),
+                                  ? Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Container(),
+                                        textGlobalWidget(
+                                            text: _addItemController
+                                                    .jsonResponse['features']
+                                                ['Wear Type'],
+                                            fontSize: 15.0,
+                                            fontWeight: FontWeight.w600,
+                                            textAlign: TextAlign.start,
+                                            textColor: Colors.black),
+                                        GestureDetector(
+                                            onTap: () {
+                                              if (_addItemController
+                                                  .isEditingCtgry.value) {
+                                                _addItemController.jsonResponse[
+                                                            'features']
+                                                        ['Wear Type'] =
+                                                    _addItemController
+                                                        .categoryController
+                                                        .text;
+                                                _addItemController
+                                                    .categoryController
+                                                    .clear();
+                                              } else {
+                                                _addItemController
+                                                    .categoryController
+                                                    .text = _addItemController
+                                                        .jsonResponse[
+                                                    'features']['Wear Type'];
+                                              }
+                                              _addItemController
+                                                      .isEditingCtgry.value =
+                                                  !_addItemController
+                                                      .isEditingCtgry.value;
+                                            },
+                                            child: Icon(_addItemController
+                                                    .isEditingCtgry.value
+                                                ? Icons.check
+                                                : Icons.edit)),
+                                      ],
                                     )
                                   : Container(),
                             );
                           }),
                           Spaces.smallh,
-                          TextFieldComponent(
-                            hintColor: const Color(0xff24686D).withOpacity(0.6),
-                            readOnly: true,
-                            validator: FormValidator.validateName,
-                            hintText: 'Color',
-                            textEditingController:
-                                _addItemController.colorController,
+                          Obx(
+                            () => TextFieldComponent(
+                              hintColor:
+                                  const Color(0xff24686D).withOpacity(0.6),
+                              readOnly:
+                                  !_addItemController.isEditingColor.value,
+                              validator: FormValidator.validateName,
+                              hintText: 'Color',
+                              textEditingController:
+                                  _addItemController.colorController,
+                            ),
                           ),
                           Spaces.smallh,
                           Obx(() {
                             return Visibility(
                               visible: _addItemController.isValue.value,
                               child: _addItemController.jsonResponse.isNotEmpty
-                                  ? Center(
-                                      child: textGlobalWidget(
-                                          text: _addItemController
-                                              .jsonResponse['color'],
-                                          fontSize: 15.0,
-                                          fontWeight: FontWeight.w600,
-                                          textAlign: TextAlign.start,
-                                          textColor: Colors.black),
+                                  ? Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Container(),
+                                        textGlobalWidget(
+                                            text: _addItemController
+                                                .jsonResponse['color'],
+                                            fontSize: 15.0,
+                                            fontWeight: FontWeight.w600,
+                                            textAlign: TextAlign.start,
+                                            textColor: Colors.black),
+                                        GestureDetector(
+                                            onTap: () {
+                                              if (_addItemController
+                                                  .isEditingColor.value) {
+                                                _addItemController
+                                                        .jsonResponse['color'] =
+                                                    _addItemController
+                                                        .colorController.text;
+                                                _addItemController
+                                                    .colorController
+                                                    .clear();
+                                              } else {
+                                                _addItemController
+                                                        .colorController.text =
+                                                    _addItemController
+                                                        .jsonResponse['color'];
+                                              }
+                                              _addItemController
+                                                      .isEditingColor.value =
+                                                  !_addItemController
+                                                      .isEditingColor.value;
+                                            },
+                                            child: Icon(_addItemController
+                                                    .isEditingColor.value
+                                                ? Icons.check
+                                                : Icons.edit)),
+                                      ],
                                     )
                                   : Container(),
                             );
                           }),
                           Spaces.smallh,
-                          TextFieldComponent(
-                            hintColor: const Color(0xff24686D).withOpacity(0.6),
-                            readOnly: true,
-                            validator: FormValidator.validateName,
-                            hintText: 'Season',
-                            textEditingController:
-                                _addItemController.seasonController,
+                          Obx(
+                            () => TextFieldComponent(
+                              hintColor:
+                                  const Color(0xff24686D).withOpacity(0.6),
+                              readOnly:
+                                  !_addItemController.isEditingSeasn.value,
+                              validator: FormValidator.validateName,
+                              hintText: 'Season',
+                              textEditingController:
+                                  _addItemController.seasonController,
+                            ),
                           ),
                           Spaces.smallh,
                           Obx(() {
                             return Visibility(
                               visible: _addItemController.isValue.value,
                               child: _addItemController.jsonResponse.isNotEmpty
-                                  ? Center(
-                                      child: textGlobalWidget(
-                                          text: _addItemController
-                                                  .jsonResponse['features']
-                                              ['Weather'],
-                                          fontSize: 15.0,
-                                          fontWeight: FontWeight.w600,
-                                          textAlign: TextAlign.start,
-                                          textColor: Colors.black),
+                                  ? Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Container(),
+                                        textGlobalWidget(
+                                            text: _addItemController
+                                                    .jsonResponse['features']
+                                                ['Weather'],
+                                            fontSize: 15.0,
+                                            fontWeight: FontWeight.w600,
+                                            textAlign: TextAlign.start,
+                                            textColor: Colors.black),
+                                        GestureDetector(
+                                            onTap: () {
+                                              if (_addItemController
+                                                  .isEditingSeasn.value) {
+                                                _addItemController.jsonResponse[
+                                                        'features']['Weather'] =
+                                                    _addItemController
+                                                        .seasonController.text;
+                                                _addItemController
+                                                    .seasonController
+                                                    .clear();
+                                              } else {
+                                                _addItemController
+                                                    .seasonController
+                                                    .text = _addItemController
+                                                        .jsonResponse[
+                                                    'features']['Weather'];
+                                              }
+                                              _addItemController
+                                                      .isEditingSeasn.value =
+                                                  !_addItemController
+                                                      .isEditingSeasn.value;
+                                            },
+                                            child: Icon(_addItemController
+                                                    .isEditingSeasn.value
+                                                ? Icons.check
+                                                : Icons.edit)),
+                                      ],
                                     )
                                   : Container(),
                             );
                           }),
                           Spaces.smallh,
-                          TextFieldComponent(
-                            hintColor: const Color(0xff24686D).withOpacity(0.6),
-                            readOnly: true,
-                            validator: FormValidator.validateName,
-                            hintText: 'Gender',
-                            textEditingController:
-                                _addItemController.genderController,
+                          Obx(
+                            () => TextFieldComponent(
+                              hintColor:
+                                  const Color(0xff24686D).withOpacity(0.6),
+                              readOnly: !_addItemController.isEditingGndr.value,
+                              validator: FormValidator.validateName,
+                              hintText: 'Gender',
+                              textEditingController:
+                                  _addItemController.genderController,
+                            ),
                           ),
                           Spaces.smallh,
                           Obx(() {
                             return Visibility(
                               visible: _addItemController.isValue.value,
                               child: _addItemController.jsonResponse.isNotEmpty
-                                  ? Center(
-                                      child: textGlobalWidget(
-                                          text: _addItemController
-                                                  .jsonResponse['features']
-                                              ['Gender'],
-                                          fontSize: 15.0,
-                                          fontWeight: FontWeight.w600,
-                                          textAlign: TextAlign.start,
-                                          textColor: Colors.black),
+                                  ? Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Container(),
+                                        textGlobalWidget(
+                                            text: _addItemController
+                                                    .jsonResponse['features']
+                                                ['Gender'],
+                                            fontSize: 15.0,
+                                            fontWeight: FontWeight.w600,
+                                            textAlign: TextAlign.start,
+                                            textColor: Colors.black),
+                                        GestureDetector(
+                                            onTap: () {
+                                              if (_addItemController
+                                                  .isEditingGndr.value) {
+                                                _addItemController.jsonResponse[
+                                                        'features']['Gender'] =
+                                                    _addItemController
+                                                        .genderController.text;
+                                                _addItemController
+                                                    .genderController
+                                                    .clear();
+                                              } else {
+                                                _addItemController
+                                                    .genderController
+                                                    .text = _addItemController
+                                                        .jsonResponse[
+                                                    'features']['Gender'];
+                                              }
+                                              _addItemController
+                                                      .isEditingGndr.value =
+                                                  !_addItemController
+                                                      .isEditingGndr.value;
+                                            },
+                                            child: Icon(_addItemController
+                                                    .isEditingGndr.value
+                                                ? Icons.check
+                                                : Icons.edit)),
+                                      ],
                                     )
                                   : Container(),
                             );

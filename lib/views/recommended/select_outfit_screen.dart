@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -31,10 +33,10 @@ class SelectOutFitScreen extends StatelessWidget {
     required this.topId,
   });
 
-  Map<String, dynamic> data = {
-    'shirt': 'asset/images/week_image2.png',
-    'pant': 'asset/images/week_image3.png'
-  };
+  // Map<String, dynamic> data = {
+  //   'shirt': 'asset/images/week_image2.png',
+  //   'pant': 'asset/images/week_image3.png'
+  // };
   final RecommendedOutfitController _recommendedOutfitController =
       Get.put(RecommendedOutfitController());
   DateTime? selectedDateTime;
@@ -56,6 +58,13 @@ class SelectOutFitScreen extends StatelessWidget {
   String getFormattedTime(DateTime dateTime) {
     return DateFormat('hh:mm a').format(
         dateTime); // Returns formatted date and time (e.g., "12/12/2024 3:40 PM")
+  }
+
+  String updateDate() {
+    DateTime now = DateTime.now();
+    DateFormat formatter = DateFormat('yyyy-MM-dd hh:mm:ss a');
+    String formattedDate = formatter.format(now);
+    return formattedDate;
   }
 
   Future<void> selectDateTime(
@@ -90,6 +99,7 @@ class SelectOutFitScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    log(topId);
     return SafeArea(
       child: Scaffold(
         extendBodyBehindAppBar: true,
@@ -98,47 +108,76 @@ class SelectOutFitScreen extends StatelessWidget {
             child: Padding(
               padding: const EdgeInsets.only(top: 20.0, right: 10.0),
               child: AppBarComponent(
-                title: 'Select Outfit',
+                  title: 'Select Outfit',
 
-                // 'Weekly Planner',
-                isBack: true,
-                isShowUser: false,
-                isShowDone: true,
-                onClick: () async {
-                  await selectDateTime(context);
-                  String day = getDayOfWeek(selectedDateTime!);
-                  String dateDay = getFormattedDate(selectedDateTime!);
-                  String date = getFormattedDateTime(selectedDateTime!);
-                  String time = getFormattedTime(selectedDateTime!);
-                  if (selectedDateTime != null) {
-                    // Save to Firestore
-                    FirebaseFirestore.instance.collection('weekplanner').add({
-                      'outfitUserId': _auth.currentUser!.uid,
-                      'day': day,
-                      'dateDay': dateDay,
-                      'date': date,
-                      'time': time,
-                      'timestamp':
-                          Timestamp.now(), // Store timestamp for sorting
-                      'topWear': topWear, // Replace with your variables
-                      'bottomWear': bottomWear,
-                      'footWear': footWear,
-                    }).then((_) {
+                  // 'Weekly Planner',
+                  isBack: true,
+                  isShowUser: false,
+                  isShowDone: true,
+                  onClick: () async {
+                    await selectDateTime(context);
+                    String day = getDayOfWeek(selectedDateTime!);
+                    String dateDay = getFormattedDate(selectedDateTime!);
+                    String date = getFormattedDateTime(selectedDateTime!);
+                    String time = getFormattedTime(selectedDateTime!);
+                    if (selectedDateTime != null) {
+                      // Save to Firestore
+                      FirebaseFirestore.instance.collection('weekplanner').add({
+                        'outfitUserId': _auth.currentUser!.uid,
+                        'day': day,
+                        'dateDay': dateDay,
+                        'date': date,
+                        'time': time,
+                        'timestamp':
+                            Timestamp.now(), // Store timestamp for sorting
+                        'topWear': topWear, // Replace with your variables
+                        'bottomWear': bottomWear,
+                        'footWear': footWear,
+                      }).then((_) {
+                        ScaffoldMessenger.of(context)
+                            .showSnackBar(const SnackBar(
+                          content: Text('Outfit saved successfully'),
+                        ));
+                      }).catchError((error) {
+                        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                          content: Text('Failed to save outfit: $error'),
+                        ));
+                      });
+                    } else {
                       ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-                        content: Text('Outfit saved successfully'),
+                        content: Text('Please select date and time first'),
                       ));
-                    }).catchError((error) {
-                      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                        content: Text('Failed to save outfit: $error'),
-                      ));
-                    });
-                  } else {
-                    ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-                      content: Text('Please select date and time first'),
-                    ));
-                  }
-                },
-              ),
+                    }
+                    CollectionReference clothes =
+                        FirebaseFirestore.instance.collection('clothes');
+                    QuerySnapshot topSnapshot =
+                        await clothes.where('clotheId', isEqualTo: topId).get();
+                    QuerySnapshot footSnapshot = await clothes
+                        .where('clotheId', isEqualTo: footId)
+                        .get();
+                    QuerySnapshot btmSnapshot = await clothes
+                        .where('clotheId', isEqualTo: bottomId)
+                        .get();
+                    if (topSnapshot.docs.isNotEmpty &&
+                        footSnapshot.docs.isNotEmpty &&
+                        btmSnapshot.docs.isNotEmpty) {
+                      DocumentSnapshot topDocument = topSnapshot.docs.first;
+                      DocumentSnapshot footDocument = footSnapshot.docs.first;
+                      DocumentSnapshot btmDocument = btmSnapshot.docs.first;
+
+                      await topDocument.reference.update({
+                        'lastUsed': updateDate(),
+                      });
+
+                      await btmDocument.reference.update({
+                        'lastUsed': updateDate(),
+                      });
+
+                      await footDocument.reference.update({
+                        'lastUsed': updateDate(),
+                      });
+                    }
+                  }),
             )),
         body: containerGlobalWidget(Padding(
           padding: const EdgeInsets.only(top: 90.0, left: 25.0, right: 25.0),

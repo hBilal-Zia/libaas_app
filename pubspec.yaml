@@ -52,7 +52,8 @@ dependencies:
   firebase_storage: ^11.6.9
   google_sign_in: ^6.2.1
   dropdown_button2: ^2.3.9
-  flutter_local_notifications: ^17.2.1
+  cached_network_image: ^3.4.0
+  awesome_notifications: ^0.9.3+1
 
 dev_dependencies:
   flutter_test:

@@ -4,6 +4,7 @@ import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/foundation.dart';
+import 'package:get/get_rx/get_rx.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
@@ -17,6 +18,13 @@ class AddItemController extends GetxController {
   TextEditingController genderController = TextEditingController();
   File? image; // Declare as nullable
   final picker = ImagePicker();
+
+  RxBool isEditingStyle = false.obs;
+  RxBool isEditingCtgry = false.obs;
+  RxBool isEditingColor = false.obs;
+  RxBool isEditingSeasn = false.obs;
+  RxBool isEditingGndr = false.obs;
+
   @override
   void onInit() {
     // TODO: implement onInit
@@ -85,7 +93,7 @@ class AddItemController extends GetxController {
 
   String? downloadURL;
   Future<void> uploadImage(File imageData) async {
-    const url = 'https://c8d2-38-10-174-236.ngrok-free.app/classify';
+    const url = 'https://a81b-38-10-164-67.ngrok-free.app/classify';
 
     try {
       // Create a multipart request

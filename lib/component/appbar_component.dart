@@ -9,6 +9,7 @@ class AppBarComponent extends StatelessWidget {
   final bool? isBack;
   final bool? isShowUser;
   final bool? isShowDone;
+  final String? btnTxt;
   final VoidCallback? onClick;
 
   AppBarComponent({
@@ -17,6 +18,7 @@ class AppBarComponent extends StatelessWidget {
     this.isBack = true,
     this.isShowUser = false,
     this.isShowDone = false,
+    this.btnTxt,
     this.onClick,
   });
 
@@ -80,13 +82,13 @@ class AppBarComponent extends StatelessWidget {
                             color: const Color(0xff094A4F),
                             borderRadius: BorderRadius.circular(20.0)),
                         alignment: Alignment.center,
-                        child: const Padding(
-                          padding: EdgeInsets.symmetric(
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(
                               horizontal: 11.0, vertical: 2.0),
                           child: Text(
-                            'Save',
-                            style:
-                                TextStyle(color: Colors.white, fontSize: 18.0),
+                            btnTxt ?? 'Save',
+                            style: const TextStyle(
+                                color: Colors.white, fontSize: 18.0),
                           ),
                         ),
                       ),
@@ -125,11 +127,13 @@ class AppBarComponent extends StatelessWidget {
                       ), // Leading icon
                 const SizedBox(
                     width: 10.0), // Adjust the spacing between icon and title
-                textGlobalWidget(
-                    text: title ?? 'Term and Condition',
-                    fontSize: 28.0,
-                    fontWeight: FontWeight.w500,
-                    textColor: Colors.black),
+                Flexible(
+                  child: textGlobalWidget(
+                      text: title ?? 'Term and Condition',
+                      fontSize: 25.0,
+                      fontWeight: FontWeight.w500,
+                      textColor: Colors.black),
+                ),
               ],
             ),
           ),

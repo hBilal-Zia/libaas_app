@@ -63,28 +63,35 @@ class HomeController extends GetxController {
   //     print('Error fetching Firestore data: $e');
   //   }
   // }
-
   Future<void> _initialize() async {
-    isLoaded = true;
+    try {
+      isLoaded = true;
+      update();
 
-    currentLocation = await _getCurrentLocation();
-    if (currentLocation != null) {
-      getWeather(currentLocation!.latitude, currentLocation!.longitude);
-      placemarks = await placemarkFromCoordinates(
-          currentLocation!.latitude, currentLocation!.longitude);
+      currentLocation = await _getCurrentLocation();
+      if (currentLocation != null) {
+        getWeather(currentLocation!.latitude, currentLocation!.longitude);
+        placemarks = await placemarkFromCoordinates(
+            currentLocation!.latitude, currentLocation!.longitude);
 
-      Placemark place1 = placemarks![0];
-      Placemark place2 = placemarks![1];
-      currentAddress =
-          "${place1.name} ${place2.name} ${place1.subLocality} ${place1.subAdministrativeArea} ${place1.postalCode}";
-      debugPrint(currentAddress.toString());
-      Timer(const Duration(seconds: 3), () {
+        Placemark place1 = placemarks![0];
+        Placemark place2 = placemarks![1];
+        currentAddress =
+            "${place1.name} ${place2.name} ${place1.subLocality} ${place1.subAdministrativeArea} ${place1.postalCode}";
+        debugPrint(currentAddress.toString());
+        // Timer(const Duration(seconds: 3), () {
         isLoaded = false;
         update();
-      });
+        // });
+        // update();
+      }
+    } catch (e) {
+      debugPrint("Error during initialization: $e");
+      // Handle the error as needed, e.g., show an error message
+    } finally {
+      isLoaded = false;
       update();
     }
-    update();
   }
 
   Future<Position> _getCurrentLocation() async {
