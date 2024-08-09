@@ -1,7 +1,6 @@
 
-![posterrr](https://github.com/user-attachments/assets/fa36fbca-e035-45df-8c0c-13cf60b27d42)
 
-
+<img src="https://github.com/user-attachments/assets/e3969dbe-04cc-4be8-ba5c-e9742caf590c" width="800" height="500">
 <h1>Frontend (Flutter) </h1> 
 •	Built using Flutter and Dart <br>
 •	Uses the GetX package for state management<br>
