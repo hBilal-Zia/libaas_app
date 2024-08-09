@@ -1,9 +1,6 @@
 
 ![33](https://github.com/user-attachments/assets/ad194768-7c3b-4eea-987d-1381d76f2124)
 
-•Brief OverView:
-This repository implements a comprehensive outfit recommendation system that integrates a Flutter frontend with a Flask backend. The system uses the ResNet50 model to classify images of clothing items and recommends outfits based on the user's preferences, wardrobe, and current weather
-
 <h1>Frontend (Flutter) </h1> 
 •	Built using Flutter and Dart <br>
 •	Uses the GetX package for state management<br>
@@ -18,21 +15,15 @@ This repository implements a comprehensive outfit recommendation system that int
 •	Virtual Try-On (allow users to try on outfits virtually using augmented reality)<br>
 
 <h1>Backend (Flask) </h1>
-•	Built using Flask and Python
-•	Uses the ResNet50 model to classify images of clothing items
-•	Integrates with the OpenWeatherMap API to retrieve current weather data
-•	Provides API endpoints for the frontend to retrieve recommended outfits
-•	Features:
-•	User authentication and authorization
-•	Wardrobe management (store and retrieve user wardrobe data)
-•	Outfit recommendation algorithm (uses ResNet50 and user data to generate recommendations)
-•	Push notification service (sends notifications to users)
-Files and Folders:
-•	flutter_app: contains the Flutter frontend code
-•	flask_api: contains the Flask backend code
-•	models: contains the ResNet50 model and other machine learning models
-•	utils: contains utility functions for image processing and API integration
-•	database: contains the database schema and migration scripts
+•	Built using Flask and Python <br>
+•	Uses the ResNet50 model to classify images of clothing items <br>
+•	Integrates with the OpenWeatherMap API to retrieve current weather data <br>
+•	Provides API endpoints for the frontend to retrieve recommended outfits <br>
+<h2>Features</h2>
+•	User authentication and authorization <br>
+•	Wardrobe management (store and retrieve user wardrobe data) <br>
+•	Outfit recommendation algorithm (uses ResNet50 and user data to generate recommendations) <br>
+•	Push notification service (sends notifications to users) <br>
 
 <h1>How to Run</h1>
 1.	Clone the repository and navigate to the flutter_app folder
