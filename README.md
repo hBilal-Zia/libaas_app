@@ -27,7 +27,7 @@
 
 <h1>How to Run</h1>
 <h2>Prerequisites</h2>
-•	Operating System:
+•	Operating System <br>
 Ensure you have a compatible OS 10 & 11 (Windows, macOS, or Linux) <br>
 <h2>Hardware</h2>
 At least 4GB of RAM (8GB recommended) and 2.8 GB of free disk space (more required for Flutter development) <br>
