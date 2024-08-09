@@ -35,8 +35,8 @@ class NotificationScreen extends StatelessWidget {
     return firestore
         .collection('notifications')
         .where('userId', isEqualTo: userId)
-        .where('scheduleTime', isGreaterThanOrEqualTo: startTimestamp)
-        .where('scheduleTime', isLessThanOrEqualTo: endTimestamp)
+        // .where('scheduleTime', isGreaterThanOrEqualTo: startTimestamp)
+        // .where('scheduleTime', isLessThanOrEqualTo: endTimestamp)
         .snapshots();
   }
 
