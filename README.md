@@ -7,15 +7,15 @@ This repository implements a comprehensive outfit recommendation system that int
 <h1>Frontend (Flutter) </h1> 
 •	Built using Flutter and Dart <br>
 •	Uses the GetX package for state management<br>
-<h2>Features</h2>:
-•	Account Signup & Login
-•	Wardrobe Management (add, edit, delete clothing items)
-•	Outfit Recommendation (based on user preferences, wardrobe, and weather)
-•	Weekly Outfit Plan (generate a weekly plan based on user preferences)
-•	Outfit Feedback (allow users to rate and comment on recommended outfits)
-•	Recommendation History (display previous outfit recommendations)
-•	Push Notifications (send notifications for new outfit recommendations)
-•	Virtual Try-On (allow users to try on outfits virtually using augmented reality)
+<h2>Features</h2>
+•	Account Signup & Login <br>
+•	Wardrobe Management (add, edit, delete clothing items) <br>
+•	Outfit Recommendation (based on user preferences, wardrobe, and weather) <br>
+•	Weekly Outfit Plan (generate a weekly plan based on user preferences) <br>
+•	Outfit Feedback (allow users to rate and comment on recommended outfits) <br>
+•	Recommendation History (display previous outfit recommendations) <br>
+•	Push Notifications (send notifications for new outfit recommendations) <br>
+•	Virtual Try-On (allow users to try on outfits virtually using augmented reality)<br>
 
 <h1>Backend (Flask) </h1>
 •	Built using Flask and Python
