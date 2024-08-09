@@ -26,13 +26,13 @@
 •	Push notification service (sends notifications to users) <br>
 
 <h1>How to Run</h1>
-1.	Clone the repository and navigate to the flutter_app folder
-2.	Run flutter pub get to install dependencies
-3.	Run flutter run to start the Flutter app
-4.	Navigate to the flask_api folder and run python app.py to start the Flask API
-5.	Open a web browser and navigate to http://localhost:5000 to access the API endpoints
-Database:
+1.	Clone the repository and navigate to the flutter_app folder <br>
+2.	Run flutter pub get to install dependencies <br>
+3.	Run flutter run to start the Flutter app <br>
+4.	Navigate to the flask_api folder and run python app.py to start the Flask API <br>
+5.	Open a web browser and navigate to http://localhost:5000 to access the API endpoints <br>
+<h2>Database</h2>
 The repository uses a Firebase use to store user data and wardrobe information. You will need to create a database and run the migration scripts to set up the schema.
-Note:
+<h2>Note</h2>
 This repository is a comprehensive implementation of an outfit recommendation system, but it may require modifications to fit your specific use case. Additionally, you may need to obtain an API key from OpenWeatherMap to use their weather API. You will also need to set up a Firebase can use to store data and run the migration scripts to use the repository.
 
