@@ -10,35 +10,6 @@ import 'package:libaas_app/component/appbar_component.dart';
 
 class NotificationScreen extends StatelessWidget {
   const NotificationScreen({super.key});
-  Stream<QuerySnapshot> _getScheduleStream() {
-    final FirebaseAuth auth = FirebaseAuth.instance;
-    final FirebaseFirestore firestore = FirebaseFirestore.instance;
-    final String? userId = auth.currentUser?.uid;
-
-    if (userId == null) {
-      return const Stream
-          .empty(); // Return an empty stream if no user is authenticated
-    }
-
-    // Get current time
-    DateTime now = DateTime.now();
-
-    // Calculate start and end of today based on current time
-    DateTime startOfDay = DateTime(now.year, now.month, now.day);
-    DateTime endOfDay = DateTime(now.year, now.month, now.day, 23, 59, 59, 999);
-
-    // Convert to Firestore Timestamp
-    Timestamp startTimestamp = Timestamp.fromDate(startOfDay);
-    Timestamp endTimestamp = Timestamp.fromDate(endOfDay);
-
-    // Query Firestore
-    return firestore
-        .collection('notifications')
-        .where('userId', isEqualTo: userId)
-        // .where('scheduleTime', isGreaterThanOrEqualTo: startTimestamp)
-        // .where('scheduleTime', isLessThanOrEqualTo: endTimestamp)
-        .snapshots();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -78,7 +49,11 @@ class NotificationScreen extends StatelessWidget {
                 ),
                 Expanded(
                   child: StreamBuilder<QuerySnapshot>(
-                    stream: _getScheduleStream(),
+                    stream: FirebaseFirestore.instance
+                        .collection('notifications')
+                        .where('userId',
+                            isEqualTo: FirebaseAuth.instance.currentUser!.uid)
+                        .snapshots(),
                     builder: (context, snapshot) {
                       if (snapshot.connectionState == ConnectionState.waiting) {
                         return const Center(child: CircularProgressIndicator());
