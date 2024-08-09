@@ -5,7 +5,7 @@
 This repository implements a comprehensive outfit recommendation system that integrates a Flutter frontend with a Flask backend. The system uses the ResNet50 model to classify images of clothing items and recommends outfits based on the user's preferences, wardrobe, and current weather
 
 <h1>Frontend (Flutter) </h1> 
-•	Built using Flutter and Dart
+•	Built using Flutter and Dart <br>
 •	Uses the GetX package for state management
 •	Features:
 •	Account Signup & Login
