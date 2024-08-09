@@ -53,7 +53,7 @@ Add Flutter to PATH <br>
 •	Add the flutter/bin directory to your system's PATH environment variable <br>
 •	For Windows, modify your PATH in the Environment Variables settings <br>
 •	For macOS and Linux, add export PATH="$PATH:<flutter-directory>/flutter/bin" to your .bashrc, .zshrc, or .bash_profile file <br>
-Verify Installation: <br>
+<h3>Verify Installation </h3> <br>
 •	Open a terminal or command prompt and run flutter doctor to ensure everything is set up correctly <br>
 Configure Android Studio for Flutter <br>
 •	Install Flutter Plugin <br>
