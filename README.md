@@ -31,9 +31,9 @@
 Ensure you have a compatible OS 10 & 11 (Windows, macOS, or Linux) <br>
 <h2>Hardware</h2>
 At least 4GB of RAM (8GB recommended) and 2.8 GB of free disk space (more required for Flutter development) <br>
-3.2.2. Install Android Studio
+Install Android Studio
 •Download Android Studio: <br>
-•	Go to the Android Studio download page.
+•	Go to the Android Studio download page <br>
 •	Download the installer for your OS <br>
 3.2.3. Run the Installer: <br>
 •	For Windows: Double-click the .exe file and follow the prompts <br>
