@@ -1,6 +1,8 @@
 import 'dart:math';
 
 import 'package:awesome_notifications/awesome_notifications.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:libaas_app/common_widget/schedule.dart';
 
@@ -52,5 +54,15 @@ class NotificationService {
           NotificationActionButton(
               key: "Close", label: "Close Reminder", autoDismissible: true),
         ]);
+    await FirebaseFirestore.instance.collection('notifications').add({
+      'notificationId': random.nextInt(1000000) + 1,
+      'title': 'Cloth Reminder',
+      'details': schedule.details,
+      'scheduledTime': schedule.time.toIso8601String(),
+      'createdAt': FieldValue.serverTimestamp(),
+      'userId': FirebaseAuth.instance.currentUser!.uid
+    }).catchError((error) {
+      print("Failed to add notification: $error");
+    });
   }
 }

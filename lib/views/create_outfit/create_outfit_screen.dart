@@ -544,7 +544,7 @@ class _CreateOutfitScreenState extends State<CreateOutfitScreen> {
                         },
                         child: Container(
                           alignment: Alignment.center,
-                          width: Get.width * 0.39,
+                          width: Get.width * 0.43,
                           height: 40,
                           decoration: BoxDecoration(
                               color: ColorConstraint.primaryColor,

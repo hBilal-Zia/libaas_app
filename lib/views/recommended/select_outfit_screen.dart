@@ -9,6 +9,8 @@ import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:libaas_app/common_widget/app_color.dart';
 import 'package:libaas_app/common_widget/container_global.dart';
+import 'package:libaas_app/common_widget/notification_service.dart';
+import 'package:libaas_app/common_widget/schedule.dart';
 import 'package:libaas_app/common_widget/spaces.dart';
 import 'package:libaas_app/common_widget/text_global.dart';
 import 'package:libaas_app/views/recommended/controller/recommend_outfit_controller.dart';
@@ -177,6 +179,14 @@ class SelectOutFitScreen extends StatelessWidget {
                         'lastUsed': updateDate(),
                       });
                     }
+                    DateTime selectedTime =
+                        selectedDateTime!.subtract(const Duration(hours: 2));
+                    // log("${selectedTime}SSSS SLECTEDD");
+
+                    NotificationService.scheduleNotification(
+                        schedule: Schedule(
+                            details: 'You have a cloth to wear at $time',
+                            time: selectedTime));
                   }),
             )),
         body: containerGlobalWidget(Padding(

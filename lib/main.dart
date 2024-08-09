@@ -1,6 +1,8 @@
+import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:libaas_app/common_widget/notification_service.dart';
 import 'package:libaas_app/firebase_options.dart';
 import 'package:libaas_app/views/home_screen/controller/home_controller.dart';
 import 'package:libaas_app/views/recommended/select_outfit_screen.dart';
@@ -14,6 +16,14 @@ void main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+  await AwesomeNotifications().isNotificationAllowed().then(
+    (isAllowed) {
+      if (!isAllowed) {
+        AwesomeNotifications().requestPermissionToSendNotifications();
+      }
+    },
+  );
+  await NotificationService.initializeNotification();
   Get.put(SplashController());
   Get.put(HomeController());
   runApp(const MyApp());

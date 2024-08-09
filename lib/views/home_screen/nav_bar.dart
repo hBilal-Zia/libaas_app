@@ -38,19 +38,45 @@ class _NavBarState extends State<NavBar> {
   Widget build(BuildContext context) {
     return Scaffold(
         body: _pageNo[_currentPage],
-        bottomNavigationBar: ConvexAppBar(
-            backgroundColor: ColorConstraint.primaryColor,
-            style: TabStyle.fixedCircle,
-            items: const [
-              TabItem(icon: Icons.home, title: 'Home'),
-              TabItem(icon: FontAwesomeIcons.shirt, title: 'Outfit'),
-              TabItem(icon: Icons.add, title: 'Add'),
-              TabItem(icon: FontAwesomeIcons.solidBell, title: 'Notification'),
-              TabItem(icon: Icons.settings, title: 'Setting'),
-            ],
-            initialActiveIndex: _currentPage,
-            onTap: (int i) {
-              setState(() => _currentPage = i);
-            }));
+        bottomNavigationBar: StyleProvider(
+          style: Style(),
+          child: ConvexAppBar(
+              backgroundColor: ColorConstraint.primaryColor,
+              style: TabStyle.fixedCircle,
+              items: const [
+                TabItem(
+                  icon: Icons.home,
+                  title: 'Home',
+                ),
+                TabItem(icon: FontAwesomeIcons.shirt, title: 'Outfit'),
+                TabItem(icon: Icons.add, title: 'Add'),
+                TabItem(
+                  icon: FontAwesomeIcons.solidBell,
+                  title: 'Notification',
+                ),
+                TabItem(icon: Icons.settings, title: 'Setting'),
+              ],
+              initialActiveIndex: _currentPage,
+              onTap: (int i) {
+                setState(() => _currentPage = i);
+              }),
+        ));
+  }
+}
+
+class Style extends StyleHook {
+  @override
+  double get activeIconSize => 40;
+
+  @override
+  double get activeIconMargin => 10;
+
+  @override
+  double get iconSize => 20;
+
+  @override
+  TextStyle textStyle(Color color, [String? someOtherParameter]) {
+    // Handle the optional parameter (if necessary), or just ignore it
+    return TextStyle(fontSize: 12, color: color);
   }
 }
