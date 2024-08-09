@@ -26,13 +26,63 @@
 •	Push notification service (sends notifications to users) <br>
 
 <h1>How to Run</h1>
-1.	Clone the repository and navigate to the flutter_app folder <br>
-2.	Run flutter pub get to install dependencies <br>
-3.	Run flutter run to start the Flutter app <br>
-4.	Navigate to the flask_api folder and run python app.py to start the Flask API <br>
-5.	Open a web browser and navigate to http://localhost:5000 to access the API endpoints <br>
-<h2>Database</h2>
-The repository uses a Firebase use to store user data and wardrobe information. You will need to create a database and run the migration scripts to set up the schema.
-<h2>Note</h2>
+<h2>Prerequisites</h2>
+•	Operating System:
+Ensure you have a compatible OS 10 & 11 (Windows, macOS, or Linux).
+•	Hardware:
+At least 4GB of RAM (8GB recommended) and 2.8 GB of free disk space (more required for Flutter development).
+3.2.2. Install Android Studio
+•	Download Android Studio:
+•	Go to the Android Studio download page.
+•	Download the installer for your OS.
+3.2.3. Run the Installer:
+•	For Windows: Double-click the .exe file and follow the prompts.
+•	For macOS: Open the .dmg file and drag Android Studio to your Applications folder.
+•	For Linux: Extract the .zip file and run the studio.sh script from the command line.
+3.2.4. Complete Setup:
+•	Follow the setup wizard to install the necessary SDK packages.
+•	You may need to install additional components such as the Android SDK and Android SDK Build-Tools.
+3.2.5. Install Flutter
+•	Download Flutter SDK:
+•	Visit the Flutter SDK download page.
+•	Download the stable release for your OS.
+3.2.5. Extract the SDK:
+
+•	Extract the downloaded .zip file to a suitable location on your file system.
+•	For example, on macOS and Linux, you can extract it to your home directory: ~/flutter.
+3.2.6.  Add Flutter to PATH:
+•	Add the flutter/bin directory to your system's PATH environment variable.
+•	For Windows, modify your PATH in the Environment Variables settings.
+•	For macOS and Linux, add export PATH="$PATH:<flutter-directory>/flutter/bin" to your .bashrc, .zshrc, or .bash_profile file.
+3.2.7.  Verify Installation:
+•	Open a terminal or command prompt and run flutter doctor to ensure everything is set up correctly.
+3.2.8.  Configure Android Studio for Flutter
+•	Install Flutter Plugin:
+•	Open Android Studio.
+•	Go to File > Settings (or Android Studio > Preferences on macOS).
+•	Navigate to Plugins and search for "Flutter".
+•	Install the Flutter plugin (this will also install the Dart plugin).
+•	Restart Android Studio:
+•	Restart Android Studio to activate the new plugins.
+3.2.9.   Create a New Flutter Project
+•	Start a New Project:
+•	Open Android Studio.
+•	Go to File > New > New Project.
+•	Select "Flutter" from the project type options.
+•	Click "Next".
+•	Configure Project:
+•	Enter a project name, location, and other details.
+•	Click "Finish" to create the project.
+•	Run Your Flutter App:
+•	Connect an Android device or start an emulator.
+•	Click the green "Run" button (a play icon) in Android Studio to build and run your app.
+3.2.10.   Common Flutter Commands
+•	Run App: flutter run
+•	Build APK: flutter build apk
+•	Build iOS App: flutter build ios
+•	Update Flutter: flutter upgrade
+•	Install Packages: flutter pub get
+3.2.11. Troubleshooting
+•	If you encounter issues, refer to the Flutter documentation or the Android Studio documentation.
 This repository is a comprehensive implementation of an outfit recommendation system, but it may require modifications to fit your specific use case. Additionally, you may need to obtain an API key from OpenWeatherMap to use their weather API. You will also need to set up a Firebase can use to store data and run the migration scripts to use the repository.
 
