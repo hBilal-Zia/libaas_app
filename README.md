@@ -1,17 +1,59 @@
+
 ![33](https://github.com/user-attachments/assets/ad194768-7c3b-4eea-987d-1381d76f2124)
 
-DartFlix is a Content-Based-Movie-Recommender which gives recommendations based on KNN.
+•DartFlix is a Content-Based-Movie-Recommender which gives recommendations based on KNN.
 
-A Content-Based Recommender works by the data that we take from the user, either explicitly (rating) or implicitly (clicking on a link). By the data we create a user profile, which is then used to suggest to the user, as the user provides more input or take more actions on the recommendation, the engine becomes more accurate.
+•A Content-Based Recommender works by the data that we take from the user, either explicitly (rating) or implicitly (clicking on a link). By the data we create a user profile, which is then used to suggest to the user, as the user provides more input or take more actions on the recommendation, the engine becomes more accurate.
 
-Content Based Recommender System recommends movies similar to the movie user likes and analyses the sentiments on the reviews given by the user for that movie.
+•Content Based Recommender System recommends movies similar to the movie user likes and analyses the sentiments on the reviews given by the user for that movie.
 
-The details of the movies(title, genre, runtime, rating, poster, etc) are fetched using an API created in this project using Flask and Machine learning, https://enage22.herokuapp.com/ and https://www.themoviedb.org/documentation/api, and using the IMDB id of the movie in the API, I did web scraping to get the reviews given by the user in the IMDB site using beautifulsoup4 and performed sentiment analysis on those reviews.It uses recommendations fetched from api made by me https://enage22.herokuapp.com/.
+•The details of the movies(title, genre, runtime, rating, poster, etc) are fetched using an API created in this project using Flask and Machine learning, https://enage22.herokuapp.com/ and https://www.themoviedb.org/documentation/api, and using the IMDB id of the movie in the API, I did web scraping to get the reviews given by the user in the IMDB site using beautifulsoup4 and performed sentiment analysis on those reviews.It uses recommendations fetched from api made by me https://enage22.herokuapp.com/.
 
-There is a Movie search feature which will show all the recommended movies from the movies name.
+•There is a Movie search feature which will show all the recommended movies from the movies name.
 
-DartFlix uses users movie taste to show recommended movies in the homepage.
+•DartFlix uses users movie taste to show recommended movies in the homepage.
 
-It also stores the users previously watched movies.
+•It also stores the users previously watched movies.
 
-There is a Movie review tab which shows all reviews and performed sentiment analysis on those reviews.
+•Brief OverView:
+This repository implements a comprehensive outfit recommendation system that integrates a Flutter frontend with a Flask backend. The system uses the ResNet50 model to classify images of clothing items and recommends outfits based on the user's preferences, wardrobe, and current weather.
+
+<h1>Frontend (Flutter) </h1>:
+•	Built using Flutter and Dart
+•	Uses the GetX package for state management
+•	Features:
+•	Account Signup & Login
+•	Wardrobe Management (add, edit, delete clothing items)
+•	Outfit Recommendation (based on user preferences, wardrobe, and weather)
+•	Weekly Outfit Plan (generate a weekly plan based on user preferences)
+•	Outfit Feedback (allow users to rate and comment on recommended outfits)
+•	Recommendation History (display previous outfit recommendations)
+•	Push Notifications (send notifications for new outfit recommendations)
+•	Virtual Try-On (allow users to try on outfits virtually using augmented reality)
+Backend (Flask):
+•	Built using Flask and Python
+•	Uses the ResNet50 model to classify images of clothing items
+•	Integrates with the OpenWeatherMap API to retrieve current weather data
+•	Provides API endpoints for the frontend to retrieve recommended outfits
+•	Features:
+•	User authentication and authorization
+•	Wardrobe management (store and retrieve user wardrobe data)
+•	Outfit recommendation algorithm (uses ResNet50 and user data to generate recommendations)
+•	Push notification service (sends notifications to users)
+Files and Folders:
+•	flutter_app: contains the Flutter frontend code
+•	flask_api: contains the Flask backend code
+•	models: contains the ResNet50 model and other machine learning models
+•	utils: contains utility functions for image processing and API integration
+•	database: contains the database schema and migration scripts
+How to Run:
+1.	Clone the repository and navigate to the flutter_app folder
+2.	Run flutter pub get to install dependencies
+3.	Run flutter run to start the Flutter app
+4.	Navigate to the flask_api folder and run python app.py to start the Flask API
+5.	Open a web browser and navigate to http://localhost:5000 to access the API endpoints
+Database:
+The repository uses a Firebase use to store user data and wardrobe information. You will need to create a database and run the migration scripts to set up the schema.
+Note:
+This repository is a comprehensive implementation of an outfit recommendation system, but it may require modifications to fit your specific use case. Additionally, you may need to obtain an API key from OpenWeatherMap to use their weather API. You will also need to set up a Firebase can use to store data and run the migration scripts to use the repository.
+
