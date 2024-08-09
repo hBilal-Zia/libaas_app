@@ -65,24 +65,25 @@ At least 4GB of RAM (8GB recommended) and 2.8 GB of free disk space (more requir
 •	Restart Android Studio <br>
 •	Restart Android Studio to activate the new plugins <br>
  <h3>Create a New Flutter Project </h3>
-•	Start a New Project:
-•	Open Android Studio.
-•	Go to File > New > New Project.
-•	Select "Flutter" from the project type options.
-•	Click "Next".
-•	Configure Project:
-•	Enter a project name, location, and other details.
-•	Click "Finish" to create the project.
-•	Run Your Flutter App:
-•	Connect an Android device or start an emulator.
-•	Click the green "Run" button (a play icon) in Android Studio to build and run your app.
-3.2.10.   Common Flutter Commands
-•	Run App: flutter run
-•	Build APK: flutter build apk
-•	Build iOS App: flutter build ios
-•	Update Flutter: flutter upgrade
-•	Install Packages: flutter pub get
-3.2.11. Troubleshooting
-•	If you encounter issues, refer to the Flutter documentation or the Android Studio documentation.
-This repository is a comprehensive implementation of an outfit recommendation system, but it may require modifications to fit your specific use case. Additionally, you may need to obtain an API key from OpenWeatherMap to use their weather API. You will also need to set up a Firebase can use to store data and run the migration scripts to use the repository.
+•	Start a New Project <br>
+•	Open Android Studio <br>
+•	Go to File > New > New Project <br>
+•	Select "Flutter" from the project type options <br>
+•	Click "Next" <br>
+•	Configure Project <br>
+•	Enter a project name, location, and other details <br>
+•	Click "Finish" to create the project <br>
+•	Run Your Flutter App <br>
+•	Connect an Android device or start an emulator <br>
+•	Click the green "Run" button (a play icon) in Android Studio to build and run your app <br>
+• Common Flutter Commands <br>
+•	Run App: flutter run <br>
+•	Build APK: flutter build apk <br>
+•	Build iOS App: flutter build ios <br>
+•	Update Flutter: flutter upgrade <br>
+•	Install Packages: flutter pub get <br>
+• Troubleshooting <br>
+•	If you encounter issues, refer to the Flutter documentation or the Android Studio documentation <br>
+• Complete Setup <br>
+ 
 
