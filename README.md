@@ -39,9 +39,9 @@ At least 4GB of RAM (8GB recommended) and 2.8 GB of free disk space (more requir
 •	For Windows: Double-click the .exe file and follow the prompts <br>
 •	For macOS: Open the .dmg file and drag Android Studio to your Applications folder <br>
 •	For Linux: Extract the .zip file and run the studio.sh script from the command line <br>
-• Complete Setup <br>
 •	Follow the setup wizard to install the necessary SDK packages <br>
 •	You may need to install additional components such as the Android SDK and Android SDK Build-Tools <br>
+• Complete Setup <br>
  <h3>Install Flutter </h3>
 •	Download Flutter SDK <br>
 •	Visit the Flutter SDK download page <br>
@@ -49,10 +49,11 @@ At least 4GB of RAM (8GB recommended) and 2.8 GB of free disk space (more requir
  • Extract the SDK <br>
 •	Extract the downloaded .zip file to a suitable location on your file system <br>
 •	For example, on macOS and Linux, you can extract it to your home directory: ~/flutter <br>
-Add Flutter to PATH <br>
+• Add Flutter to PATH <br>
 •	Add the flutter/bin directory to your system's PATH environment variable <br>
 •	For Windows, modify your PATH in the Environment Variables settings <br>
 •	For macOS and Linux, add export PATH="$PATH:<flutter-directory>/flutter/bin" to your .bashrc, .zshrc, or .bash_profile file <br>
+• Complete Setup <br>
 <h3>Verify Installation </h3> 
 •	Open a terminal or command prompt and run flutter doctor to ensure everything is set up correctly <br>
 Configure Android Studio for Flutter <br>
