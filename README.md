@@ -6,8 +6,8 @@ This repository implements a comprehensive outfit recommendation system that int
 
 <h1>Frontend (Flutter) </h1> 
 •	Built using Flutter and Dart <br>
-•	Uses the GetX package for state management
-•	Features:
+•	Uses the GetX package for state management<br>
+•	<h2>Features</h2>:
 •	Account Signup & Login
 •	Wardrobe Management (add, edit, delete clothing items)
 •	Outfit Recommendation (based on user preferences, wardrobe, and weather)
