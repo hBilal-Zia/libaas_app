@@ -35,14 +35,14 @@ At least 4GB of RAM (8GB recommended) and 2.8 GB of free disk space (more requir
 •Download Android Studio: <br>
 •	Go to the Android Studio download page <br>
 •	Download the installer for your OS <br>
-3.2.3. Run the Installer: <br>
+• Run the Installer <br>
 •	For Windows: Double-click the .exe file and follow the prompts <br>
 •	For macOS: Open the .dmg file and drag Android Studio to your Applications folder <br>
 •	For Linux: Extract the .zip file and run the studio.sh script from the command line <br>
 3.2.4. Complete Setup:
 •	Follow the setup wizard to install the necessary SDK packages <br>
 •	You may need to install additional components such as the Android SDK and Android SDK Build-Tools <br>
- <h3>Install Flutter </h3> <br>
+ <h3>Install Flutter </h3>
 •	Download Flutter SDK <br>
 •	Visit the Flutter SDK download page <br>
 •	Download the stable release for your OS <br>
