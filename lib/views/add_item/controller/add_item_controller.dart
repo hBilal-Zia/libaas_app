@@ -93,7 +93,7 @@ class AddItemController extends GetxController {
 
   String? downloadURL;
   Future<void> uploadImage(File imageData) async {
-    const url = 'https://a81b-38-10-164-67.ngrok-free.app/classify';
+    const url = 'https://5a2c-38-10-164-228.ngrok-free.app/classify';
 
     try {
       // Create a multipart request

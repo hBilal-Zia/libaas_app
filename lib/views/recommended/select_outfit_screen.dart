@@ -18,7 +18,7 @@ import 'package:libaas_app/views/virtual_try_on/virtual_try_on_screen.dart';
 
 import '../../component/appbar_component.dart';
 
-class SelectOutFitScreen extends StatelessWidget {
+class SelectOutFitScreen extends StatefulWidget {
   String footWear;
   String topWear;
   String bottomWear;
@@ -35,13 +35,17 @@ class SelectOutFitScreen extends StatelessWidget {
     required this.topId,
   });
 
+  @override
+  State<SelectOutFitScreen> createState() => _SelectOutFitScreenState();
+}
+
+class _SelectOutFitScreenState extends State<SelectOutFitScreen> {
   // Map<String, dynamic> data = {
-  //   'shirt': 'asset/images/week_image2.png',
-  //   'pant': 'asset/images/week_image3.png'
-  // };
   final RecommendedOutfitController _recommendedOutfitController =
       Get.put(RecommendedOutfitController());
+
   DateTime? selectedDateTime;
+
   String getDayOfWeek(DateTime dateTime) {
     return DateFormat.EEEE()
         .format(dateTime); // Returns day of the week (e.g., "Monday")
@@ -97,11 +101,18 @@ class SelectOutFitScreen extends StatelessWidget {
     }
   }
 
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    _recommendedOutfitController.isLoadingVirtual.value = false;
+  }
+
   final FirebaseAuth _auth = FirebaseAuth.instance;
 
   @override
   Widget build(BuildContext context) {
-    log(topId);
+    log(widget.topId);
     return SafeArea(
       child: Scaffold(
         extendBodyBehindAppBar: true,
@@ -132,9 +143,10 @@ class SelectOutFitScreen extends StatelessWidget {
                         'time': time,
                         'timestamp':
                             Timestamp.now(), // Store timestamp for sorting
-                        'topWear': topWear, // Replace with your variables
-                        'bottomWear': bottomWear,
-                        'footWear': footWear,
+                        'topWear':
+                            widget.topWear, // Replace with your variables
+                        'bottomWear': widget.bottomWear,
+                        'footWear': widget.footWear,
                       }).then((_) {
                         ScaffoldMessenger.of(context)
                             .showSnackBar(const SnackBar(
@@ -152,13 +164,14 @@ class SelectOutFitScreen extends StatelessWidget {
                     }
                     CollectionReference clothes =
                         FirebaseFirestore.instance.collection('clothes');
-                    QuerySnapshot topSnapshot =
-                        await clothes.where('clotheId', isEqualTo: topId).get();
+                    QuerySnapshot topSnapshot = await clothes
+                        .where('clotheId', isEqualTo: widget.topId)
+                        .get();
                     QuerySnapshot footSnapshot = await clothes
-                        .where('clotheId', isEqualTo: footId)
+                        .where('clotheId', isEqualTo: widget.footId)
                         .get();
                     QuerySnapshot btmSnapshot = await clothes
-                        .where('clotheId', isEqualTo: bottomId)
+                        .where('clotheId', isEqualTo: widget.bottomId)
                         .get();
                     if (topSnapshot.docs.isNotEmpty &&
                         footSnapshot.docs.isNotEmpty &&
@@ -210,21 +223,21 @@ class SelectOutFitScreen extends StatelessWidget {
                             bottom: 0,
                             right: 0,
                             child: Image.network(
-                              bottomWear,
+                              widget.bottomWear,
                               height: 250,
                             )),
                         Positioned(
                             top: 0,
                             left: 0,
                             child: Image.network(
-                              topWear,
+                              widget.topWear,
                               height: 250,
                             )),
                         Positioned(
                             bottom: 0,
                             left: 0,
                             child: Image.network(
-                              footWear,
+                              widget.footWear,
                               height: 250,
                             ))
                       ],
@@ -235,35 +248,50 @@ class SelectOutFitScreen extends StatelessWidget {
         )),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
         floatingActionButton: Container(
-          color: Colors.white,
-          height: Get.height * 0.12,
-          width: Get.width,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              GestureDetector(
-                onTap: () async {
-                  await _recommendedOutfitController.showOptions(
-                      context, topId, bottomId, footId);
-                },
-                child: Container(
-                  alignment: Alignment.center,
-                  width: 60,
-                  height: 60,
-                  decoration: BoxDecoration(
-                      color: ColorConstraint.primaryColor,
-                      borderRadius: BorderRadius.circular(12.0)),
-                  child: Image.asset('asset/images/icon-AR.png'),
-                ),
-              ),
-              textGlobalWidget(
-                  text: 'Try On',
-                  fontSize: 12,
-                  fontWeight: FontWeight.w700,
-                  textColor: Colors.black),
-            ],
-          ),
-        ),
+            color: Colors.white,
+            height: Get.height * 0.12,
+            width: Get.width,
+            child: Obx(
+              () => _recommendedOutfitController.isLoadingVirtual.value
+                  ? Container(
+                      alignment: Alignment.center,
+                      width: 60,
+                      height: 60,
+                      decoration: BoxDecoration(
+                          color: ColorConstraint.primaryColor,
+                          borderRadius: BorderRadius.circular(12.0)),
+                      child: const CircularProgressIndicator(
+                        color: Colors.white,
+                      ))
+                  : Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        GestureDetector(
+                          onTap: () async {
+                            await _recommendedOutfitController.showOptions(
+                                context,
+                                widget.topId,
+                                widget.bottomId,
+                                widget.footId);
+                          },
+                          child: Container(
+                            alignment: Alignment.center,
+                            width: 60,
+                            height: 60,
+                            decoration: BoxDecoration(
+                                color: ColorConstraint.primaryColor,
+                                borderRadius: BorderRadius.circular(12.0)),
+                            child: Image.asset('asset/images/icon-AR.png'),
+                          ),
+                        ),
+                        textGlobalWidget(
+                            text: 'Try On',
+                            fontSize: 12,
+                            fontWeight: FontWeight.w700,
+                            textColor: Colors.black)
+                      ],
+                    ),
+            )),
       ),
     );
   }

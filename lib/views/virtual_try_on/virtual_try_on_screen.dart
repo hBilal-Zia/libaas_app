@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -14,14 +16,10 @@ import 'package:libaas_app/views/recommended/controller/recommend_outfit_control
 import '../../component/appbar_component.dart';
 
 class TryOnScreen extends StatelessWidget {
-  String footId;
-  String bottomId;
-  String topId;
+  String image;
   TryOnScreen({
     super.key,
-    required this.footId,
-    required this.bottomId,
-    required this.topId,
+    required this.image,
   });
 
   final RecommendedOutfitController _recommendedOutfitController =
@@ -31,6 +29,7 @@ class TryOnScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    log(image.toString());
     return SafeArea(
       child: Scaffold(
         extendBodyBehindAppBar: true,
