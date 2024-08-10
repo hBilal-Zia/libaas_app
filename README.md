@@ -24,7 +24,7 @@
 •	Wardrobe management (store and retrieve user wardrobe data) <br>
 •	Outfit recommendation algorithm (uses ResNet50 and user data to generate recommendations) <br>
 •	Push notification service (sends notifications to users) <br>
-
+ <a href="https://github.com/hBilal-Zia/Libaas_ML">link for AI & ML Work</a>
 <h1>How to Run</h1>
 <h2>Prerequisites</h2>
 •	Operating System <br>
