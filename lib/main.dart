@@ -10,6 +10,7 @@ import 'package:libaas_app/views/splash/splash.dart';
 import 'package:libaas_app/views/splash/splash_controller.dart';
 import 'package:libaas_app/views/recommended/recommend_outfit_screen.dart';
 import 'package:libaas_app/views/week_planner/weekly_planner_screen.dart';
+import 'package:permission_handler/permission_handler.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -24,6 +25,12 @@ void main() async {
     },
   );
   await NotificationService.initializeNotification();
+  // Request storage permission
+  var status = await Permission.storage.request();
+  if (!status.isGranted) {
+    // Optionally, you can handle the case when permission is not granted
+    print('Storage permission denied');
+  }
   Get.put(SplashController());
   Get.put(HomeController());
   runApp(const MyApp());

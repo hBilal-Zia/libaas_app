@@ -86,15 +86,6 @@ class RecommendedOutfitController extends GetxController {
   }
 
   Future<void> saveImage(Uint8List image) async {
-    // Request storage permission
-    var status = await Permission.storage.request();
-    if (!status.isGranted) {
-      // Handle the case when permission is not granted
-      Get.snackbar('Permission Denied',
-          'Please grant storage permission to save the image.');
-      return;
-    }
-
     try {
       // Get the directory to save the file
       final directory = await getExternalStorageDirectory();
@@ -120,41 +111,11 @@ class RecommendedOutfitController extends GetxController {
       Get.snackbar('Error', 'Failed to save the image.');
     }
   }
-  // Future<void> virtualTryOnAPI(
-  //     String imagePath, String bottomWearId, String topWearId) async {
-  //   String url =
-  //       'https://0a1d-35-240-238-179.ngrok-free.app/virtual_try_on'; // Replace with your actual Flask API URL
-
-  //   // Create multipart request
-  //   var request = http.MultipartRequest('GET', Uri.parse(url));
-  //   request.fields['bottom_wear'] = "5JdgxLTo5ajPFVOwYfHW";
-  //   request.fields['top_wear'] = "LaAFHZrOD7EExTKQDSQq";
-  //   request.files.add(await http.MultipartFile.fromPath('image', imagePath));
-
-  //   // Send the request and wait for the response
-  //   var response = await request.send();
-
-  //   if (response.statusCode == 200) {
-  //     var responseData = await response.stream.bytesToString();
-  //     var data = json.decode(responseData);
-  //     String tryOnImageBase64 = data['try_on_image'];
-  //     print("Received try-on image (base64): $tryOnImageBase64");
-
-  //     // Decode the base64 image and save it as a file
-  //     final directory = await getApplicationDocumentsDirectory();
-  //     final imagePath = '${directory.path}/try_on_image.png';
-  //     File imageFile = File(imagePath);
-  //     imageFile.writeAsBytesSync(base64Decode(tryOnImageBase64));
-  //     print('Image saved as $imagePath');
-  //   } else {
-  //     print("Failed to get try-on image. Status code: ${response.statusCode}");
-  //   }
-  // }
 
   Future<void> _uploadImage(String bottomwearId, String topwearId,
       File imageData, BuildContext context) async {
     const String apiUrl =
-        'https://0297-35-185-186-16.ngrok-free.app/virtual_try_on';
+        'https://9fd7-35-187-244-135.ngrok-free.app/virtual_try_on';
     isLoadingVirtual.value = true;
     log(isLoadingVirtual.value.toString());
     update();
@@ -207,7 +168,7 @@ class RecommendedOutfitController extends GetxController {
 
   Future<void> recommendationData(
       String userId, String temp, String eventVal, String venueVal) async {
-    const url = 'https://0297-35-185-186-16.ngrok-free.app/recommendation';
+    const url = 'https://9fd7-35-187-244-135.ngrok-free.app/recommendation';
     Map<String, String> params = {
       'user_id': userId,
       'temperature': temp,
