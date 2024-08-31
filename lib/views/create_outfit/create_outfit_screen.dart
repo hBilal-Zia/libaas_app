@@ -543,9 +543,10 @@ class _CreateOutfitScreenState extends State<CreateOutfitScreen> {
                           }
                         },
                         child: Container(
+                          padding: const EdgeInsets.symmetric(
+                              vertical: 10.0, horizontal: 15.0),
                           alignment: Alignment.center,
                           width: Get.width * 0.43,
-                          height: 40,
                           decoration: BoxDecoration(
                               color: ColorConstraint.primaryColor,
                               borderRadius: BorderRadius.circular(20.0)),

@@ -1,4 +1,5 @@
 import 'dart:developer';
+import 'dart:typed_data';
 
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -16,7 +17,7 @@ import 'package:libaas_app/views/recommended/controller/recommend_outfit_control
 import '../../component/appbar_component.dart';
 
 class TryOnScreen extends StatelessWidget {
-  String image;
+  final Uint8List image;
   TryOnScreen({
     super.key,
     required this.image,
@@ -24,8 +25,6 @@ class TryOnScreen extends StatelessWidget {
 
   final RecommendedOutfitController _recommendedOutfitController =
       Get.put(RecommendedOutfitController());
-
-  final FirebaseAuth _auth = FirebaseAuth.instance;
 
   @override
   Widget build(BuildContext context) {
@@ -39,7 +38,6 @@ class TryOnScreen extends StatelessWidget {
               padding: const EdgeInsets.only(top: 20.0, right: 10.0),
               child: AppBarComponent(
                 title: 'Virtual Try On',
-
                 // 'Weekly Planner',
                 isBack: true,
                 isShowUser: false,
@@ -54,7 +52,9 @@ class TryOnScreen extends StatelessWidget {
               children: [
                 Spaces.large,
                 GestureDetector(
-                  onTap: () {},
+                  onTap: () {
+                    _recommendedOutfitController.saveImage(image);
+                  },
                   child: Container(
                       alignment: Alignment.center,
                       width: 60,
@@ -73,6 +73,8 @@ class TryOnScreen extends StatelessWidget {
                   width: Get.width * 0.8,
                   decoration: BoxDecoration(
                       color: Colors.white,
+                      image: DecorationImage(
+                          image: MemoryImage(image), fit: BoxFit.fill),
                       borderRadius: BorderRadius.circular(20.0)),
                   child: const Padding(
                     padding: EdgeInsets.all(8.0),
@@ -80,35 +82,6 @@ class TryOnScreen extends StatelessWidget {
                 ),
               ]),
         )),
-        floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-        floatingActionButton: Container(
-          color: Colors.white,
-          height: Get.height * 0.12,
-          width: Get.width,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              GestureDetector(
-                onTap: () {},
-                child: Container(
-                    alignment: Alignment.center,
-                    width: 60,
-                    height: 60,
-                    decoration: BoxDecoration(
-                        color: ColorConstraint.primaryColor,
-                        borderRadius: BorderRadius.circular(12.0)),
-                    child: const CircularProgressIndicator(
-                      color: Colors.white,
-                    )),
-              ),
-              textGlobalWidget(
-                  text: 'Generated',
-                  fontSize: 12,
-                  fontWeight: FontWeight.w700,
-                  textColor: Colors.black),
-            ],
-          ),
-        ),
       ),
     );
   }

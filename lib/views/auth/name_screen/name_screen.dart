@@ -142,45 +142,52 @@ class NameScreen extends StatelessWidget {
                           text: 'Completed',
                           fontSize: 24,
                           onTap: () async {
-                            debugPrint(_nameScreenController
-                                .username.text.isNotEmpty
-                                .toString());
-                            bool val = _nameScreenController.image != null;
-                            debugPrint(val.toString());
                             if (_nameScreenController
-                                    .username.text.isNotEmpty &&
-                                _nameScreenController.image != null) {
+                                .username.text.isNotEmpty) {
                               try {
-                                String fileName = DateTime.now()
-                                    .millisecondsSinceEpoch
-                                    .toString();
-                                debugPrint(fileName.toString());
-                                Reference storageReference = FirebaseStorage
-                                    .instance
-                                    .ref()
-                                    .child('images/$fileName');
+                                if (_nameScreenController.image == null) {
+                                  // Update Firestore document with username and image URL
+                                  await _firestore
+                                      .collection('user')
+                                      .doc(_auth.currentUser!.uid)
+                                      .update({
+                                    'userName':
+                                        _nameScreenController.username.text,
+                                    'image':
+                                        'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRCxqlSNYUW9cmBUymWOYLEvZPQzOVNwBHL6dadFN4y1VR3n7yKBOUrXGWoCo-kC0IWuwY&usqp=CAU',
+                                  });
+                                } else {
+                                  String fileName = DateTime.now()
+                                      .millisecondsSinceEpoch
+                                      .toString();
+                                  debugPrint(fileName.toString());
+                                  Reference storageReference = FirebaseStorage
+                                      .instance
+                                      .ref()
+                                      .child('images/$fileName');
 
-                                debugPrint(storageReference.toString());
-                                UploadTask uploadTask = storageReference
-                                    .putFile(_nameScreenController.image!);
-                                debugPrint(uploadTask.toString());
+                                  debugPrint(storageReference.toString());
+                                  UploadTask uploadTask = storageReference
+                                      .putFile(_nameScreenController.image!);
+                                  debugPrint(uploadTask.toString());
 
-                                TaskSnapshot taskSnapshot =
-                                    await uploadTask.whenComplete(() {});
-                                debugPrint('dsds');
-                                String imageUrl =
-                                    await taskSnapshot.ref.getDownloadURL();
-                                debugPrint('dd');
+                                  TaskSnapshot taskSnapshot =
+                                      await uploadTask.whenComplete(() {});
+                                  debugPrint('dsds');
+                                  String imageUrl =
+                                      await taskSnapshot.ref.getDownloadURL();
+                                  debugPrint('dd');
 
-                                // Update Firestore document with username and image URL
-                                await _firestore
-                                    .collection('user')
-                                    .doc(_auth.currentUser!.uid)
-                                    .update({
-                                  'userName':
-                                      _nameScreenController.username.text,
-                                  'image': imageUrl,
-                                });
+                                  // Update Firestore document with username and image URL
+                                  await _firestore
+                                      .collection('user')
+                                      .doc(_auth.currentUser!.uid)
+                                      .update({
+                                    'userName':
+                                        _nameScreenController.username.text,
+                                    'image': imageUrl,
+                                  });
+                                }
 
                                 // Navigate to NavBar after successful update
                                 Get.offAll(const NavBar());

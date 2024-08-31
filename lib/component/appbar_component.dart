@@ -101,7 +101,8 @@ class AppBarComponent extends StatelessWidget {
         titleSpacing: 0.0,
         title: Container(
           clipBehavior: Clip.antiAliasWithSaveLayer,
-          height: 60,
+          // height: 60,
+          padding: const EdgeInsets.symmetric(vertical: 15.0),
           decoration: const BoxDecoration(
               color: Colors.white,
               borderRadius: BorderRadius.only(

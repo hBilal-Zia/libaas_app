@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:developer';
 import 'dart:io';
+import 'dart:typed_data';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -10,6 +11,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:libaas_app/model/recommended_model.dart';
 import 'package:libaas_app/views/virtual_try_on/virtual_try_on_screen.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:permission_handler/permission_handler.dart';
 
 class RecommendedOutfitController extends GetxController {
   bool isLoading = false;
@@ -83,6 +85,41 @@ class RecommendedOutfitController extends GetxController {
     );
   }
 
+  Future<void> saveImage(Uint8List image) async {
+    // Request storage permission
+    var status = await Permission.storage.request();
+    if (!status.isGranted) {
+      // Handle the case when permission is not granted
+      Get.snackbar('Permission Denied',
+          'Please grant storage permission to save the image.');
+      return;
+    }
+
+    try {
+      // Get the directory to save the file
+      final directory = await getExternalStorageDirectory();
+      final path = '${directory!.path}/libaasapp';
+
+      // Create the directory if it doesn't exist
+      final saveDir = Directory(path);
+      if (!await saveDir.exists()) {
+        await saveDir.create(recursive: true);
+      }
+
+      // Generate a random file name
+      final randomFileName = '${DateTime.now().millisecondsSinceEpoch}.jpg';
+      final filePath = '$path/$randomFileName';
+
+      // Save the file
+      final file = File(filePath);
+      await file.writeAsBytes(image);
+
+      Get.snackbar('Success', 'Image saved to $filePath');
+    } catch (e) {
+      print('Error saving image: $e');
+      Get.snackbar('Error', 'Failed to save the image.');
+    }
+  }
   // Future<void> virtualTryOnAPI(
   //     String imagePath, String bottomWearId, String topWearId) async {
   //   String url =
@@ -117,7 +154,7 @@ class RecommendedOutfitController extends GetxController {
   Future<void> _uploadImage(String bottomwearId, String topwearId,
       File imageData, BuildContext context) async {
     const String apiUrl =
-        'https://eaa9-35-240-238-179.ngrok-free.app/virtual_try_on';
+        'https://0297-35-185-186-16.ngrok-free.app/virtual_try_on';
     isLoadingVirtual.value = true;
     log(isLoadingVirtual.value.toString());
     update();
@@ -139,18 +176,19 @@ class RecommendedOutfitController extends GetxController {
         // Send the request
         var response = await request.send();
         if (response.statusCode == 200) {
-          // Read the response
+// Read the response
           var responseData = await response.stream.bytesToString();
           var decodedData = jsonDecode(responseData);
-          log(decodedData.toString());
-          String tryOnImage = decodedData['try_on_image'];
+          String tryOnImageBase64 = decodedData['try_on_image'];
+
+          // Decode Base64 to bytes
+          final imageBytes = base64Decode(tryOnImageBase64);
+
           isLoadingVirtual.value = false;
           update();
-          log(isLoadingVirtual.value.toString());
 
-          Get.to(TryOnScreen(
-            image: tryOnImage,
-          ));
+          // Navigate to TryOnScreen with the decoded image bytes
+          Get.to(() => TryOnScreen(image: imageBytes));
         } else {
           print('Error: ${response.statusCode}');
           const snackBar = SnackBar(
@@ -169,7 +207,7 @@ class RecommendedOutfitController extends GetxController {
 
   Future<void> recommendationData(
       String userId, String temp, String eventVal, String venueVal) async {
-    const url = 'https://3d73-35-240-238-179.ngrok-free.app/recommendation';
+    const url = 'https://0297-35-185-186-16.ngrok-free.app/recommendation';
     Map<String, String> params = {
       'user_id': userId,
       'temperature': temp,
@@ -180,6 +218,7 @@ class RecommendedOutfitController extends GetxController {
       isLoading = true;
       var response =
           await http.get(Uri.parse(url).replace(queryParameters: params));
+      log(response.body.toString());
       if (response.statusCode == 200) {
         debugPrint(response.statusCode.toString());
         recommendedData = parseRecommendations(response.body);
