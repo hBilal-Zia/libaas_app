@@ -534,7 +534,7 @@ class _CreateOutfitScreenState extends State<CreateOutfitScreen> {
                           } else {
                             // Valid combination, proceed to fetch recommended outfit
                             _recommendedOutfitController.recommendationData(
-                                'MQHQ1fm51ZgcbfYIEhaDSidGEKu2',
+                                userId,
                                 _homeController.temp!.toInt().toString(),
                                 event,
                                 venue);
